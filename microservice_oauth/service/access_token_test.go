@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/diegoclair/bookstore_oauth-api/domain/entity"
+	"github.com/diegoclair/microservice_oauth/domain/entity"
 	"github.com/stretchr/testify/assert"
 )
 

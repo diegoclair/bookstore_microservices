@@ -5,9 +5,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/diegoclair/bookstore_oauth-api/domain"
-	"github.com/diegoclair/bookstore_oauth-api/utils/cryptoutils"
-	"github.com/diegoclair/bookstore_oauth-api/utils/errors"
+	"github.com/diegoclair/microservice_oauth/domain"
+	"github.com/diegoclair/microservice_oauth/utils/cryptoutils"
+	"github.com/diegoclair/microservice_oauth/utils/errors"
 )
 
 // AccessTokenRequest struct

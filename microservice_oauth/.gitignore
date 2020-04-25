@@ -9,7 +9,7 @@
 .vscode
 .env
 gin-bin
-bookstore_oauth-api
+microservice_oauth
 
 
 # Test binary, built with `go test -c`

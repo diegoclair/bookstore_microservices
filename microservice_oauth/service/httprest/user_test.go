@@ -6,7 +6,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/diegoclair/bookstore_oauth-api/domain"
+	"github.com/diegoclair/microservice_oauth/domain"
 	"github.com/federicoleon/golang-restclient/rest"
 	"github.com/stretchr/testify/assert"
 	//"github.com/mercadolibre/golang-restclient/rest" this version doesn't work with golang >= 1.13, so we are use the federicoleon while wait for approve the federicoleon PR

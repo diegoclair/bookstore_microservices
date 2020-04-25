@@ -1,8 +1,8 @@
 package server
 
 import (
-	"github.com/diegoclair/bookstore_oauth-api/server/routes/oauthroute"
-	"github.com/diegoclair/bookstore_oauth-api/service"
+	"github.com/diegoclair/microservice_oauth/server/routes/oauthroute"
+	"github.com/diegoclair/microservice_oauth/service"
 	"github.com/gin-gonic/gin"
 )
 

@@ -1,7 +1,7 @@
 package cassandra
 
 import (
-	"github.com/diegoclair/bookstore_oauth-api/domain/contract"
+	"github.com/diegoclair/microservice_oauth/domain/contract"
 	"github.com/gocql/gocql"
 )
 

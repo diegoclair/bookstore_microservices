@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"sync"
 
-	"github.com/diegoclair/bookstore_oauth-api/domain/contract"
-	"github.com/diegoclair/bookstore_oauth-api/domain/entity"
-	"github.com/diegoclair/bookstore_oauth-api/utils/errors"
+	"github.com/diegoclair/microservice_oauth/domain/contract"
+	"github.com/diegoclair/microservice_oauth/domain/entity"
+	"github.com/diegoclair/microservice_oauth/utils/errors"
 	"github.com/gin-gonic/gin"
 )
 

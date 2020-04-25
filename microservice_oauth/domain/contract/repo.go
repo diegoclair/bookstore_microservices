@@ -1,8 +1,8 @@
 package contract
 
 import (
-	"github.com/diegoclair/bookstore_oauth-api/domain/entity"
-	"github.com/diegoclair/bookstore_oauth-api/utils/errors"
+	"github.com/diegoclair/microservice_oauth/domain/entity"
+	"github.com/diegoclair/microservice_oauth/utils/errors"
 )
 
 //RepoManager defines the repository aggregator interface

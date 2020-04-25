@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/diegoclair/bookstore_oauth-api/data"
-	"github.com/diegoclair/bookstore_oauth-api/server"
-	"github.com/diegoclair/bookstore_oauth-api/service"
+	"github.com/diegoclair/microservice_oauth/data"
+	"github.com/diegoclair/microservice_oauth/server"
+	"github.com/diegoclair/microservice_oauth/service"
 	"github.com/gin-gonic/gin"
 )
 
