@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"sync"
 
+	"github.com/diegoclair/go_utils-lib/resterrors"
 	"github.com/diegoclair/microservice_oauth/domain/contract"
 	"github.com/diegoclair/microservice_oauth/domain/entity"
-	"github.com/diegoclair/microservice_oauth/utils/errors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -46,7 +46,7 @@ func (s *Controller) handleCreate(c *gin.Context) {
 	var request entity.AccessTokenRequest
 
 	if err := c.ShouldBindJSON(&request); err != nil {
-		restErr := errors.NewBadRequestError("Error 0010: Invalid Json Body Request")
+		restErr := resterrors.NewBadRequestError("Error 0010: Invalid Json Body Request")
 		c.JSON(restErr.StatusCode, restErr)
 		return
 	}

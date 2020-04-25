@@ -1,8 +1,8 @@
 package cassandra
 
 import (
+	"github.com/diegoclair/go_utils-lib/resterrors"
 	"github.com/diegoclair/microservice_oauth/domain/entity"
-	"github.com/diegoclair/microservice_oauth/utils/errors"
 	"github.com/gocql/gocql"
 )
 
@@ -17,7 +17,7 @@ func newAccessTokenDBSession(session *gocql.Session) *accessTokenDBSession {
 	}
 }
 
-func (s *accessTokenDBSession) GetByID(id string) (*entity.AccessToken, *errors.RestErr) {
+func (s *accessTokenDBSession) GetByID(id string) (*entity.AccessToken, *resterrors.RestErr) {
 
 	query := `
 		SELECT 	access_token, 
@@ -36,15 +36,15 @@ func (s *accessTokenDBSession) GetByID(id string) (*entity.AccessToken, *errors.
 	)
 	if err != nil {
 		if err == gocql.ErrNotFound {
-			return nil, errors.NewNotFoundError("Error 0002: No access token found with given id")
+			return nil, resterrors.NewNotFoundError("Error 0002: No access token found with given id")
 		}
-		return nil, errors.NewInternalServerError("Error 0001: " + err.Error())
+		return nil, resterrors.NewInternalServerError("Error 0001: " + err.Error())
 	}
 
 	return &result, nil
 }
 
-func (s *accessTokenDBSession) Create(at entity.AccessToken) *errors.RestErr {
+func (s *accessTokenDBSession) Create(at entity.AccessToken) *resterrors.RestErr {
 
 	query := `
 		INSERT INTO	access_token
@@ -70,13 +70,13 @@ func (s *accessTokenDBSession) Create(at entity.AccessToken) *errors.RestErr {
 	).Exec()
 
 	if err != nil {
-		return errors.NewInternalServerError("Error 0003: " + err.Error())
+		return resterrors.NewInternalServerError("Error 0003: " + err.Error())
 	}
 
 	return nil
 }
 
-func (s *accessTokenDBSession) UpdateExpirationTime(at entity.AccessToken) *errors.RestErr {
+func (s *accessTokenDBSession) UpdateExpirationTime(at entity.AccessToken) *resterrors.RestErr {
 
 	query := `
 		UPDATE	access_token
@@ -90,7 +90,7 @@ func (s *accessTokenDBSession) UpdateExpirationTime(at entity.AccessToken) *erro
 	).Exec()
 
 	if err != nil {
-		return errors.NewInternalServerError("Error 0004: " + err.Error())
+		return resterrors.NewInternalServerError("Error 0004: " + err.Error())
 	}
 
 	return nil

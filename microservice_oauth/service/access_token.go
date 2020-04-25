@@ -5,9 +5,9 @@ import (
 	"strings"
 	"time"
 
+	"github.com/diegoclair/go_utils-lib/resterrors"
 	"github.com/diegoclair/microservice_oauth/domain/contract"
 	"github.com/diegoclair/microservice_oauth/domain/entity"
-	"github.com/diegoclair/microservice_oauth/utils/errors"
 )
 
 const (
@@ -27,16 +27,16 @@ func newAccessTokenService(svc *Service, api contract.UserAPIService) contract.A
 	}
 }
 
-func (s *accessToken) GetByID(accessTokenID string) (*entity.AccessToken, *errors.RestErr) {
+func (s *accessToken) GetByID(accessTokenID string) (*entity.AccessToken, *resterrors.RestErr) {
 
 	accessTokenID = strings.TrimSpace(accessTokenID)
 	if len(accessTokenID) == 0 {
-		return nil, errors.NewBadRequestError("Error 0005: Invalid or expired access token")
+		return nil, resterrors.NewBadRequestError("Error 0005: Invalid or expired access token")
 	}
 	return s.svc.db.AccessToken().GetByID(accessTokenID)
 }
 
-func (s *accessToken) Create(request entity.AccessTokenRequest) (*entity.AccessToken, *errors.RestErr) {
+func (s *accessToken) Create(request entity.AccessTokenRequest) (*entity.AccessToken, *resterrors.RestErr) {
 	if err := request.Validate(); err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ func (s *accessToken) Create(request entity.AccessTokenRequest) (*entity.AccessT
 	return &at, nil
 }
 
-func (s *accessToken) UpdateExpirationTime(token entity.AccessToken) *errors.RestErr {
+func (s *accessToken) UpdateExpirationTime(token entity.AccessToken) *resterrors.RestErr {
 	if err := token.Validate(); err != nil {
 		return err
 	}

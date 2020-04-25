@@ -7,4 +7,5 @@ require (
 	github.com/gin-gonic/gin v1.6.2
 	github.com/gocql/gocql v0.0.0-20200410100145-b454769479c6
 	github.com/stretchr/testify v1.4.0
+	github.com/diegoclair/go_utils-lib v0.0.0-20200425030505-2e2bc503da25
 )

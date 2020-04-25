@@ -5,9 +5,9 @@ import (
 	"strings"
 	"time"
 
+	"github.com/diegoclair/go_utils-lib/resterrors"
 	"github.com/diegoclair/microservice_oauth/domain"
 	"github.com/diegoclair/microservice_oauth/utils/cryptoutils"
-	"github.com/diegoclair/microservice_oauth/utils/errors"
 )
 
 // AccessTokenRequest struct
@@ -25,7 +25,7 @@ type AccessTokenRequest struct {
 }
 
 //Validate checks if the access token request is valid
-func (at *AccessTokenRequest) Validate() *errors.RestErr {
+func (at *AccessTokenRequest) Validate() *resterrors.RestErr {
 	switch at.GrantType {
 	case domain.GrantTypePassowrd:
 		break
@@ -35,7 +35,7 @@ func (at *AccessTokenRequest) Validate() *errors.RestErr {
 
 	default:
 		errCode := "Error 0014: "
-		return errors.NewBadRequestError(fmt.Sprintf("%sInvalid grant_type parameter", errCode))
+		return resterrors.NewBadRequestError(fmt.Sprintf("%sInvalid grant_type parameter", errCode))
 	}
 
 	return nil
@@ -50,19 +50,19 @@ type AccessToken struct {
 }
 
 //Validate checks if the token is valid
-func (at *AccessToken) Validate() *errors.RestErr {
+func (at *AccessToken) Validate() *resterrors.RestErr {
 	at.AccessToken = strings.TrimSpace(at.AccessToken)
 	if at.AccessToken == "" {
-		return errors.NewBadRequestError("Error 0006: Invalid access token")
+		return resterrors.NewBadRequestError("Error 0006: Invalid access token")
 	}
 	if at.UserID <= 0 {
-		return errors.NewBadRequestError("Error 0007: Invalid user id")
+		return resterrors.NewBadRequestError("Error 0007: Invalid user id")
 	}
 	if at.ClientID <= 0 {
-		return errors.NewBadRequestError("Error 0008: Invalid client id")
+		return resterrors.NewBadRequestError("Error 0008: Invalid client id")
 	}
 	if at.Expires <= 0 {
-		return errors.NewBadRequestError("Error 0009: Invalid expiration time")
+		return resterrors.NewBadRequestError("Error 0009: Invalid expiration time")
 	}
 
 	return nil
