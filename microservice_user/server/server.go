@@ -1,9 +1,9 @@
 package server
 
 import (
-	"github.com/diegoclair/bookstore_users-api/server/routes/pingroute"
-	"github.com/diegoclair/bookstore_users-api/server/routes/userroute"
-	"github.com/diegoclair/bookstore_users-api/service"
+	"github.com/diegoclair/microservice_user/server/routes/pingroute"
+	"github.com/diegoclair/microservice_user/server/routes/userroute"
+	"github.com/diegoclair/microservice_user/service"
 	"github.com/gin-gonic/gin"
 )
 

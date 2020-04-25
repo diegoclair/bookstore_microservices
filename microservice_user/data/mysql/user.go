@@ -4,11 +4,11 @@ import (
 	"database/sql"
 	"fmt"
 
-	"github.com/diegoclair/bookstore_users-api/domain"
-	"github.com/diegoclair/bookstore_users-api/domain/entity"
-	"github.com/diegoclair/bookstore_users-api/logger"
-	"github.com/diegoclair/bookstore_users-api/utils/errors"
-	"github.com/diegoclair/bookstore_users-api/utils/mysqlutils"
+	"github.com/diegoclair/microservice_user/domain"
+	"github.com/diegoclair/microservice_user/domain/entity"
+	"github.com/diegoclair/microservice_user/logger"
+	"github.com/diegoclair/microservice_user/utils/errors"
+	"github.com/diegoclair/microservice_user/utils/mysqlutils"
 )
 
 type userDBClient struct {

@@ -1,12 +1,12 @@
 package main
 
 import (
-	"github.com/diegoclair/bookstore_users-api/data"
-	"github.com/diegoclair/bookstore_users-api/logger"
-	"github.com/diegoclair/bookstore_users-api/server"
+	"github.com/diegoclair/microservice_user/data"
+	"github.com/diegoclair/microservice_user/logger"
+	"github.com/diegoclair/microservice_user/server"
 	"github.com/gin-gonic/gin"
 
-	"github.com/diegoclair/bookstore_users-api/service"
+	"github.com/diegoclair/microservice_user/service"
 )
 
 func main() {

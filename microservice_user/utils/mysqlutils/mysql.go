@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/diegoclair/bookstore_users-api/utils/errors"
+	"github.com/diegoclair/microservice_user/utils/errors"
 	"github.com/go-sql-driver/mysql"
 )
 

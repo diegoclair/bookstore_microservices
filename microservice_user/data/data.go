@@ -1,8 +1,8 @@
 package data
 
 import (
-	"github.com/diegoclair/bookstore_users-api/data/mysql"
-	"github.com/diegoclair/bookstore_users-api/domain/contract"
+	"github.com/diegoclair/microservice_user/data/mysql"
+	"github.com/diegoclair/microservice_user/domain/contract"
 )
 
 // Connect returns a instace of cassandra db

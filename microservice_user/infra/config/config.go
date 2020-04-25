@@ -1,7 +1,7 @@
 package config
 
 import (
-	"github.com/diegoclair/bookstore_users-api/domain/entity"
+	"github.com/diegoclair/microservice_user/domain/entity"
 	"github.com/spf13/cast"
 	"github.com/spf13/viper"
 )

@@ -1,8 +1,8 @@
 package contract
 
 import (
-	"github.com/diegoclair/bookstore_users-api/domain/entity"
-	"github.com/diegoclair/bookstore_users-api/utils/errors"
+	"github.com/diegoclair/microservice_user/domain/entity"
+	"github.com/diegoclair/microservice_user/utils/errors"
 )
 
 // PingService holds access token operations

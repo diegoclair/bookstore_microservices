@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/diegoclair/bookstore_users-api/domain/contract"
-	"github.com/diegoclair/bookstore_users-api/infra/config"
+	"github.com/diegoclair/microservice_user/domain/contract"
+	"github.com/diegoclair/microservice_user/infra/config"
 	_ "github.com/go-sql-driver/mysql" //Used to connect to database
 )
 

@@ -1,6 +1,6 @@
 package service
 
-import "github.com/diegoclair/bookstore_users-api/domain/contract"
+import "github.com/diegoclair/microservice_user/domain/contract"
 
 // Service holds the domain service repositories
 type Service struct {

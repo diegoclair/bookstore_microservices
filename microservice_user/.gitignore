@@ -9,7 +9,7 @@
 .vscode
 .env
 gin-bin
-bookstore_users-api
+microservice_user
 
 # Test binary, built with `go test -c`
 *.test

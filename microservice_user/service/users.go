@@ -3,12 +3,12 @@ package service
 import (
 	"strings"
 
-	"github.com/diegoclair/bookstore_users-api/domain"
-	"github.com/diegoclair/bookstore_users-api/domain/contract"
-	"github.com/diegoclair/bookstore_users-api/domain/entity"
-	"github.com/diegoclair/bookstore_users-api/utils/cryptoutils"
-	"github.com/diegoclair/bookstore_users-api/utils/dateutils"
-	"github.com/diegoclair/bookstore_users-api/utils/errors"
+	"github.com/diegoclair/microservice_user/domain"
+	"github.com/diegoclair/microservice_user/domain/contract"
+	"github.com/diegoclair/microservice_user/domain/entity"
+	"github.com/diegoclair/microservice_user/utils/cryptoutils"
+	"github.com/diegoclair/microservice_user/utils/dateutils"
+	"github.com/diegoclair/microservice_user/utils/errors"
 )
 
 /* Here we have the entire business logic*/
