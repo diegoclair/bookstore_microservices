@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/diegoclair/microservice_user/utils/errors"
+	"github.com/diegoclair/go_utils-lib/resterrors"
 	"github.com/go-sql-driver/mysql"
 )
 
@@ -14,18 +14,18 @@ const (
 )
 
 // HandleMySQLError - handle mysql errors
-func HandleMySQLError(errCode string, err error) *errors.RestErr {
+func HandleMySQLError(errCode string, err error) *resterrors.RestErr {
 
 	//if exists the error on mysql.MySQLError
 	sqlErr, exists := err.(*mysql.MySQLError)
 	if !exists {
 		if strings.Contains(err.Error(), errorNoRows) {
 			if errCode == "Error 0014: " {
-				return errors.NewNotFoundError(fmt.Sprintf("%sInvalid user credentials", errCode))
+				return resterrors.NewNotFoundError(fmt.Sprintf("%sInvalid user credentials", errCode))
 			}
-			return errors.NewNotFoundError(fmt.Sprintf("%sNo records find with the parameters", errCode))
+			return resterrors.NewNotFoundError(fmt.Sprintf("%sNo records find with the parameters", errCode))
 		}
-		return errors.NewInternalServerError(
+		return resterrors.NewInternalServerError(
 			fmt.Sprintf("%sError database response: %s", errCode, err.Error()))
 	}
 
@@ -33,10 +33,10 @@ func HandleMySQLError(errCode string, err error) *errors.RestErr {
 	case duplicatedKeyCode:
 		duplicatedKey := between(sqlErr.Message, "key '", "_UNIQUE")
 		duplicatedKeyValue := between(sqlErr.Message, "entry '", "' for key")
-		return errors.NewBadRequestError(fmt.Sprintf("%sThe %s %s already exists", errCode, duplicatedKey, duplicatedKeyValue))
+		return resterrors.NewBadRequestError(fmt.Sprintf("%sThe %s %s already exists", errCode, duplicatedKey, duplicatedKeyValue))
 	}
 
-	return errors.NewInternalServerError(
+	return resterrors.NewInternalServerError(
 		fmt.Sprintf("%sError trying to processing database request: %s", errCode, err.Error()))
 }
 

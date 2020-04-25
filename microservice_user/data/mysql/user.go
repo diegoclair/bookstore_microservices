@@ -7,7 +7,8 @@ import (
 	"github.com/diegoclair/microservice_user/domain"
 	"github.com/diegoclair/microservice_user/domain/entity"
 	"github.com/diegoclair/microservice_user/logger"
-	"github.com/diegoclair/microservice_user/utils/errors"
+	"github.com/diegoclair/go_utils-lib/resterrors"
+
 	"github.com/diegoclair/microservice_user/utils/mysqlutils"
 )
 
@@ -23,7 +24,7 @@ func newUserDBClient(client *sql.DB) *userDBClient {
 }
 
 //GetByID - get a user by ID
-func (s *userDBClient) GetByID(id int64) (*entity.User, *errors.RestErr) {
+func (s *userDBClient) GetByID(id int64) (*entity.User, *resterrors.RestErr) {
 
 	query := `
 		SELECT 	u.id,
@@ -40,7 +41,7 @@ func (s *userDBClient) GetByID(id int64) (*entity.User, *errors.RestErr) {
 	if err != nil {
 		errorCode := "Error 0001: "
 		logger.Error(fmt.Sprintf("%sError when trying to prepare the query statement in GetByID", errorCode), err)
-		return nil, errors.NewInternalServerError(fmt.Sprintf("%sDatabase error", errorCode))
+		return nil, resterrors.NewInternalServerError(fmt.Sprintf("%sDatabase error", errorCode))
 	}
 	defer stmt.Close()
 
@@ -57,6 +58,7 @@ func (s *userDBClient) GetByID(id int64) (*entity.User, *errors.RestErr) {
 		&user.Status,
 		&user.CreatedAt,
 	)
+
 	if err != nil {
 		errorCode := "Error 0002: "
 		logger.Error(fmt.Sprintf("%sError when trying to execute QueryRow in GetByID", errorCode), err)
@@ -67,7 +69,7 @@ func (s *userDBClient) GetByID(id int64) (*entity.User, *errors.RestErr) {
 }
 
 // GetUserByStatus return a list of all users by status
-func (s *userDBClient) GetUserByStatus(status string) (users []entity.User, restErr *errors.RestErr) {
+func (s *userDBClient) GetUserByStatus(status string) (users []entity.User, restErr *resterrors.RestErr) {
 
 	query := `
 			SELECT 	u.id,
@@ -85,7 +87,7 @@ func (s *userDBClient) GetUserByStatus(status string) (users []entity.User, rest
 	if err != nil {
 		errorCode := "Error 0003: "
 		logger.Error(fmt.Sprintf("%sError when trying to prepare the query statement in GetUserByStatus", errorCode), err)
-		return nil, errors.NewInternalServerError(fmt.Sprintf("%sDatabase error", errorCode))
+		return nil, resterrors.NewInternalServerError(fmt.Sprintf("%sDatabase error", errorCode))
 	}
 	defer stmt.Close()
 
@@ -93,7 +95,7 @@ func (s *userDBClient) GetUserByStatus(status string) (users []entity.User, rest
 	if err != nil {
 		errorCode := "Error 0004: "
 		logger.Error(fmt.Sprintf("%sError when trying to execute Query in GetUserByStatus", errorCode), err)
-		return nil, errors.NewInternalServerError(fmt.Sprintf("%sDatabase error", errorCode))
+		return nil, resterrors.NewInternalServerError(fmt.Sprintf("%sDatabase error", errorCode))
 	}
 	defer rows.Close()
 
@@ -117,14 +119,14 @@ func (s *userDBClient) GetUserByStatus(status string) (users []entity.User, rest
 	}
 
 	if len(users) == 0 {
-		return nil, errors.NewNotFoundError(fmt.Sprintf("No users matching with the status : %s", status))
+		return nil, resterrors.NewNotFoundError(fmt.Sprintf("No users matching with the status : %s", status))
 	}
 
 	return users, nil
 }
 
 // Create - to create a user on database
-func (s *userDBClient) Create(user entity.User) (*entity.User, *errors.RestErr) {
+func (s *userDBClient) Create(user entity.User) (*entity.User, *resterrors.RestErr) {
 
 	query := `
 		INSERT INTO users 
@@ -138,7 +140,7 @@ func (s *userDBClient) Create(user entity.User) (*entity.User, *errors.RestErr) 
 	if err != nil {
 		errorCode := "Error 0006: "
 		logger.Error(fmt.Sprintf("%sError when trying to prepare the query statement in the Create user", errorCode), err)
-		return nil, errors.NewInternalServerError(fmt.Sprintf("%sDatabase error", errorCode))
+		return nil, resterrors.NewInternalServerError(fmt.Sprintf("%sDatabase error", errorCode))
 	}
 	defer stmt.Close()
 
@@ -162,7 +164,7 @@ func (s *userDBClient) Create(user entity.User) (*entity.User, *errors.RestErr) 
 }
 
 // Update - to update a user on database
-func (s *userDBClient) Update(user entity.User) (*entity.User, *errors.RestErr) {
+func (s *userDBClient) Update(user entity.User) (*entity.User, *resterrors.RestErr) {
 
 	query := `
 		UPDATE users
@@ -177,7 +179,7 @@ func (s *userDBClient) Update(user entity.User) (*entity.User, *errors.RestErr) 
 	if err != nil {
 		errorCode := "Error 0009: "
 		logger.Error(fmt.Sprintf("%sError when trying to prepare the query statement in the Update user", errorCode), err)
-		return nil, errors.NewInternalServerError(fmt.Sprintf("%sDatabase error", errorCode))
+		return nil, resterrors.NewInternalServerError(fmt.Sprintf("%sDatabase error", errorCode))
 	}
 	defer stmt.Close()
 
@@ -192,7 +194,7 @@ func (s *userDBClient) Update(user entity.User) (*entity.User, *errors.RestErr) 
 }
 
 // Delete - to delete a user on database
-func (s *userDBClient) Delete(id int64) *errors.RestErr {
+func (s *userDBClient) Delete(id int64) *resterrors.RestErr {
 
 	query := `
 		DELETE FROM users
@@ -203,7 +205,7 @@ func (s *userDBClient) Delete(id int64) *errors.RestErr {
 	if err != nil {
 		errorCode := "Error 0011: "
 		logger.Error(fmt.Sprintf("%sError when trying to prepare the query statement in the Delete user", errorCode), err)
-		return errors.NewInternalServerError(fmt.Sprintf("%sDatabase error", errorCode))
+		return resterrors.NewInternalServerError(fmt.Sprintf("%sDatabase error", errorCode))
 	}
 	defer stmt.Close()
 
@@ -218,7 +220,7 @@ func (s *userDBClient) Delete(id int64) *errors.RestErr {
 }
 
 //GetByEmailAndPassword - get a user by their email and password
-func (s *userDBClient) GetByEmailAndPassword(user entity.User) (*entity.User, *errors.RestErr) {
+func (s *userDBClient) GetByEmailAndPassword(user entity.User) (*entity.User, *resterrors.RestErr) {
 
 	query := `
 		SELECT 	u.id,
@@ -238,7 +240,7 @@ func (s *userDBClient) GetByEmailAndPassword(user entity.User) (*entity.User, *e
 	if err != nil {
 		errorCode := "Error 0013: "
 		logger.Error(fmt.Sprintf("%sError when trying to prepare the query statement in GetByEmailAndPassword", errorCode), err)
-		return nil, errors.NewInternalServerError(fmt.Sprintf("%sDatabase error", errorCode))
+		return nil, resterrors.NewInternalServerError(fmt.Sprintf("%sDatabase error", errorCode))
 	}
 	defer stmt.Close()
 

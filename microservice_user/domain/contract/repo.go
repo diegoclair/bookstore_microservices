@@ -1,8 +1,8 @@
 package contract
 
 import (
+	"github.com/diegoclair/go_utils-lib/resterrors"
 	"github.com/diegoclair/microservice_user/domain/entity"
-	"github.com/diegoclair/microservice_user/utils/errors"
 )
 
 //RepoManager defines the repository aggregator interface
@@ -16,10 +16,10 @@ type PingRepo interface{}
 
 // UserRepo defines the data set for access token
 type UserRepo interface {
-	GetByID(userID int64) (*entity.User, *errors.RestErr)
-	GetUserByStatus(status string) ([]entity.User, *errors.RestErr)
-	Create(entity.User) (*entity.User, *errors.RestErr)
-	Update(entity.User) (*entity.User, *errors.RestErr)
-	Delete(userID int64) *errors.RestErr
-	GetByEmailAndPassword(user entity.User) (*entity.User, *errors.RestErr)
+	GetByID(userID int64) (*entity.User, *resterrors.RestErr)
+	GetUserByStatus(status string) ([]entity.User, *resterrors.RestErr)
+	Create(entity.User) (*entity.User, *resterrors.RestErr)
+	Update(entity.User) (*entity.User, *resterrors.RestErr)
+	Delete(userID int64) *resterrors.RestErr
+	GetByEmailAndPassword(user entity.User) (*entity.User, *resterrors.RestErr)
 }

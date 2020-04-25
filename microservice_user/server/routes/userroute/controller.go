@@ -8,9 +8,9 @@ import (
 	"sync"
 
 	"github.com/diegoclair/bookstore_oauth-go/oauth"
+	"github.com/diegoclair/go_utils-lib/resterrors"
 	"github.com/diegoclair/microservice_user/domain/contract"
 	"github.com/diegoclair/microservice_user/domain/entity"
-	"github.com/diegoclair/microservice_user/utils/errors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -71,7 +71,7 @@ func (s *Controller) handleCreateUser(c *gin.Context) {
 
 	err := c.ShouldBindJSON(&user)
 	if err != nil {
-		restErr := errors.NewBadRequestError("Invalid json body")
+		restErr := resterrors.NewBadRequestError("Invalid json body")
 		c.JSON(restErr.StatusCode, restErr)
 		return
 	}
@@ -91,7 +91,7 @@ func (s *Controller) handleUpdateUser(c *gin.Context) {
 
 	err := c.ShouldBindJSON(&user)
 	if err != nil {
-		restErr := errors.NewBadRequestError("Invalid json body")
+		restErr := resterrors.NewBadRequestError("Invalid json body")
 		c.JSON(restErr.StatusCode, restErr)
 		return
 	}
@@ -137,7 +137,7 @@ func (s *Controller) handleLogin(c *gin.Context) {
 
 	err := c.ShouldBindJSON(&credentials)
 	if err != nil {
-		restErr := errors.NewBadRequestError("Invalid json body")
+		restErr := resterrors.NewBadRequestError("Invalid json body")
 		c.JSON(restErr.StatusCode, restErr)
 		return
 	}
@@ -196,10 +196,10 @@ func (s *Controller) limitedJSON(user entity.User, isPublic bool) interface{} {
 	return privateUser
 }
 
-func (s *Controller) getIDParameter(userParamID string) (int64, *errors.RestErr) {
+func (s *Controller) getIDParameter(userParamID string) (int64, *resterrors.RestErr) {
 	userID, userErr := strconv.ParseInt(userParamID, 10, 64)
 	if userErr != nil {
-		return 0, errors.NewBadRequestError("User id should be a number")
+		return 0, resterrors.NewBadRequestError("User id should be a number")
 	}
 
 	return userID, nil

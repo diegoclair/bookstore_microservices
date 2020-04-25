@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/diegoclair/microservice_user/utils/errors"
+	"github.com/diegoclair/go_utils-lib/resterrors"
 )
 
 // User struct
@@ -19,14 +19,14 @@ type User struct {
 }
 
 // Validate to validate a user data
-func (user *User) Validate() *errors.RestErr {
+func (user *User) Validate() *resterrors.RestErr {
 
 	user.FirstName = strings.TrimSpace(user.FirstName)
 	user.LastName = strings.TrimSpace(user.LastName)
 
 	user.Email = strings.TrimSpace(strings.ToLower(user.Email))
 	if user.Email == "" {
-		return errors.NewBadRequestError("Invalid email address")
+		return resterrors.NewBadRequestError("Invalid email address")
 	}
 
 	user.Password = strings.TrimSpace(user.Password)
@@ -38,10 +38,10 @@ func (user *User) Validate() *errors.RestErr {
 	return nil
 }
 
-func (user *User) validadePassword() *errors.RestErr {
+func (user *User) validadePassword() *resterrors.RestErr {
 	fmt.Println("cheguei aqui", user.Password)
 	if user.Password == "" || len(user.Password) < 8 {
-		return errors.NewBadRequestError("Password need at least 8 caracters")
+		return resterrors.NewBadRequestError("Password need at least 8 caracters")
 	}
 
 	return nil
