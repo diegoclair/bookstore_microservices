@@ -11,6 +11,7 @@ import (
 	"github.com/diegoclair/go_utils-lib/resterrors"
 	"github.com/diegoclair/microservice_user/domain/contract"
 	"github.com/diegoclair/microservice_user/domain/entity"
+	"github.com/diegoclair/microservice_user/server/viewmodel"
 	"github.com/gin-gonic/gin"
 )
 
@@ -181,7 +182,7 @@ func (s *Controller) limitedJSON(user entity.User, isPublic bool) interface{} {
 	// Ex: in User{} we have the `json:"id"` and in the PrivateUser{} we have the key as `json:"user_id"`
 	// so we need to do one by one like below
 	if isPublic {
-		return entity.PublicUser{
+		return viewmodel.PublicUser{
 			ID:        user.ID,
 			Status:    user.Status,
 			CreatedAt: user.CreatedAt,
@@ -190,7 +191,7 @@ func (s *Controller) limitedJSON(user entity.User, isPublic bool) interface{} {
 
 	// 2 - if the keys are the same so we can do just a json.Marshal and after a json.Unmashal to fill the colunms
 	userJSON, _ := json.Marshal(user)
-	var privateUser entity.PrivateUser
+	var privateUser viewmodel.PrivateUser
 	json.Unmarshal(userJSON, &privateUser)
 
 	return privateUser
