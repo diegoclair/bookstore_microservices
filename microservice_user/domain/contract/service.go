@@ -5,11 +5,11 @@ import (
 	"github.com/diegoclair/microservice_user/domain/entity"
 )
 
-// PingService holds access token operations
+// PingService holds a ping service operations
 type PingService interface {
 }
 
-// UserService holds access token operations
+// UserService holds a user service operations
 type UserService interface {
 	GetUser(userID int64) (*entity.User, *resterrors.RestErr)
 	SearchUser(string) ([]entity.User, *resterrors.RestErr)

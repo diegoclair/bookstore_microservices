@@ -11,10 +11,10 @@ type RepoManager interface {
 	User() UserRepo
 }
 
-// PingRepo defines the data set for access token
+// PingRepo defines the data set for ping
 type PingRepo interface{}
 
-// UserRepo defines the data set for access token
+// UserRepo defines the data set for user
 type UserRepo interface {
 	GetByID(userID int64) (*entity.User, *resterrors.RestErr)
 	GetUserByStatus(status string) ([]entity.User, *resterrors.RestErr)
