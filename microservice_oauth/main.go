@@ -18,14 +18,7 @@ func main() {
 	}
 
 	svc := service.New(db)
-	server := initializeServer(svc)
+	server := server.InitServer(svc)
 
 	server.Run(":3001")
-}
-
-func initializeServer(svc *service.Service) *gin.Engine {
-
-	srv := server.InitServer(svc)
-
-	return srv
 }
