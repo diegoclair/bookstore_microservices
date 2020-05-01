@@ -7,7 +7,7 @@ import (
 	"github.com/diegoclair/go_utils-lib/resterrors"
 )
 
-// User struct
+// User entity
 type User struct {
 	ID        int64  `json:"id"`
 	FirstName string `json:"first_name"`
@@ -47,7 +47,7 @@ func (user *User) validadePassword() *resterrors.RestErr {
 	return nil
 }
 
-//LoginRequest struct
+//LoginRequest entity
 type LoginRequest struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
