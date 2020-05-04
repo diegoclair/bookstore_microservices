@@ -20,5 +20,7 @@ func main() {
 	svc := service.New(db)
 	server := server.InitServer(svc)
 
-	server.Run(":3001")
+	if err := server.Run(":3001"); err != nil {
+		panic(err)
+	}
 }
