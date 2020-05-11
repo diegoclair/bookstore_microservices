@@ -2,7 +2,6 @@ package userroute
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"strconv"
 	"sync"
@@ -37,30 +36,30 @@ func NewController(userService contract.UserService) *Controller {
 
 // handleGetUser to handle a get user request
 func (s *Controller) handleGetUser(c *gin.Context) {
-	fmt.Println("aqui1")
+
 	if err := oauth.AuthenticateRequest(c.Request); err != nil {
 		c.JSON(err.StatusCode, err)
 		return
 	}
-	fmt.Println("aqui2")
+
 	userID, errID := s.getIDParameter(c.Param("id"))
 	if errID != nil {
 		c.JSON(errID.StatusCode, errID)
 		return
 	}
-	fmt.Println("aqui3")
+
 	user, getErr := s.userService.GetUser(userID)
 	if getErr != nil {
 		c.JSON(getErr.StatusCode, getErr)
 		return
 	}
-	fmt.Println("aqui4")
+
 	if oauth.GetCallerID(c.Request) == user.ID {
 		//If the caller is the user, so we can show a private data
 		c.JSON(http.StatusOK, s.limitedJSON(*user, false))
 		return
 	}
-	fmt.Println("aqui5")
+
 	c.JSON(http.StatusOK, s.limitedJSON(*user, oauth.IsPublic(c.Request)))
 }
 

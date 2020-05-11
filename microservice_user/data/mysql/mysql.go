@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/GuiaBolso/darwin"
+	"github.com/diegoclair/microservice_user/data/migrations"
 	"github.com/diegoclair/microservice_user/domain/contract"
 	"github.com/diegoclair/microservice_user/infra/config"
 	_ "github.com/go-sql-driver/mysql" //Used to connect to database
@@ -14,17 +16,6 @@ import (
 type DBManager struct {
 	db *sql.DB
 }
-
-var Migration = `CREATE TABLE IF NOT EXISTS users (
-	id INT AUTO_INCREMENT,
-	first_name VARCHAR(30) NOT NULL,
-	last_name VARCHAR(30) NOT NULL,
-	email VARCHAR(50),
-	password VARCHAR(100),
-	status VARCHAR(30),
-	created_at TIMESTAMP,
-	PRIMARY KEY (id)
-);`
 
 //Instance retunrs an instance of a RepoManager
 func Instance() (contract.RepoManager, error) {
@@ -43,12 +34,17 @@ func Instance() (contract.RepoManager, error) {
 	if err := db.Ping(); err != nil {
 		return nil, err
 	}
-	_, err = db.Query(Migration)
+	log.Println("Database successfully configured")
+
+	driver := darwin.NewGenericDriver(db, darwin.MySQLDialect{})
+
+	d := darwin.New(driver, migrations.Migrations, nil)
+
+	log.Println("Running the migrations")
+	err = d.Migrate()
 	if err != nil {
-		log.Println("failed to run migrations", err.Error())
 		return nil, err
 	}
-	log.Println("Database successfully configured")
 
 	instance := &DBManager{
 		db: db,

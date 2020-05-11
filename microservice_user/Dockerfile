@@ -9,8 +9,6 @@ WORKDIR /
 # Copy the source from the current directory to the working Directory inside the container 
 COPY . .
 
-COPY .env-example .env
-
 RUN go build
 
 # Add docker-compose-wait tool -------------------

@@ -1,16 +1,18 @@
 # Microservice_user  
-Microservice User
+Microservice User of bookstore project  
   
 ## Description
+
+This microservice has that main responsabilities:  
   
-This microservice has that main responsabilities :
 * Create a user
 * Update a user
 * Delete a user 
-* Get all users
 * Get user by ID
-* Get users by status  
-  
-This microservice also use oauth lib to authenticate a user: github.com/diegoclair/bookstore_oauth-go/oauth  
-  
+* Get users by status (active, inactive)
 
+This microservice also use oauth lib to authenticate a user: github.com/diegoclair/bookstore_oauth-go/oauth</b></b> 
+
+## Start:
+
+Run: <b>docker-compose up</b>

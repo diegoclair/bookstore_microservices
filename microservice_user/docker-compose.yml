@@ -5,35 +5,24 @@ services:
   db:
     container_name: microservice_user-db
     image: mysql:5.7
-    #command: --innodb-use-native-aio=0
     restart: always
     tty: true
     ports:
       - 3306:3306
-    expose:
-      - 3306
     volumes:
       - ./.docker/dbdata:/var/lib/mysql
     environment:
+      - MYSQL_ROOT_HOST=%
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=users_db
       - MYSQL_USER=root
       - MYSQL_PASSWORD=root
-    #command: 
-   #   - '--character-set-server=utf8'
-   #   - '--collation-server=utf8_general_ci'
-   # volumes:
-   #   - ./sql:/docker-entrypoint-initdb.d
     networks:
       - app-network
 
-
   app:
-    container_name: microservice_user #image created from the Dockerfile
-    image: diegoclair/microservice_user
-    build:
-      context: .
-      dockerfile: Dockerfile
+    container_name: microservice_user
+    build: .
     command: sh -c "/wait && ./microservice_user"
     ports:
       - 3000:3000
@@ -42,16 +31,12 @@ services:
     links:
       - db
     environment:
-      - DB_HOST=localhost:3306
       - WAIT_HOSTS=db:3306
       - WAIT_HOSTS_TIMEOUT=300
-      - WAIT_SLEEP_INTERVAL=30
+      - WAIT_SLEEP_INTERVAL=20
       - WAIT_HOST_CONNECT_TIMEOUT=30
-      #To make your docker application container wait for multiple hosts, the environment variable can be specified as for example WAIT_HOSTS=mysql:3306, nginx:80
     networks:
       - app-network
-  #  volumes: 
-    #  - .:./
     
 networks:
   app-network:
