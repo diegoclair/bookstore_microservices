@@ -3,7 +3,7 @@ Microservice User of bookstore project
   
 ## Description
 
-This microservice has that main responsabilities:  
+This microservice has the main responsabilities:  
   
 * Create a user
 * Update a user
