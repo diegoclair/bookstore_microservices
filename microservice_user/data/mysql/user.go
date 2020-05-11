@@ -4,22 +4,22 @@ import (
 	"database/sql"
 	"fmt"
 
+	"github.com/diegoclair/go_utils-lib/resterrors"
 	"github.com/diegoclair/microservice_user/domain"
 	"github.com/diegoclair/microservice_user/domain/entity"
 	"github.com/diegoclair/microservice_user/logger"
-	"github.com/diegoclair/go_utils-lib/resterrors"
 
 	"github.com/diegoclair/microservice_user/utils/mysqlutils"
 )
 
 type userDBClient struct {
-	client *sql.DB
+	db *sql.DB
 }
 
 // newUserDBClient returns a instance of dbrepo
-func newUserDBClient(client *sql.DB) *userDBClient {
+func newUserDBClient(db *sql.DB) *userDBClient {
 	return &userDBClient{
-		client: client,
+		db: db,
 	}
 }
 
@@ -37,7 +37,7 @@ func (s *userDBClient) GetByID(id int64) (*entity.User, *resterrors.RestErr) {
 		FROM 	users 		u 
 		WHERE 	u.id 		= ?;`
 
-	stmt, err := s.client.Prepare(query)
+	stmt, err := s.db.Prepare(query)
 	if err != nil {
 		errorCode := "Error 0001: "
 		logger.Error(fmt.Sprintf("%sError when trying to prepare the query statement in GetByID", errorCode), err)
@@ -83,7 +83,7 @@ func (s *userDBClient) GetUserByStatus(status string) (users []entity.User, rest
 
 			WHERE 	u.status 	= ?;`
 
-	stmt, err := s.client.Prepare(query)
+	stmt, err := s.db.Prepare(query)
 	if err != nil {
 		errorCode := "Error 0003: "
 		logger.Error(fmt.Sprintf("%sError when trying to prepare the query statement in GetUserByStatus", errorCode), err)
@@ -136,7 +136,7 @@ func (s *userDBClient) Create(user entity.User) (*entity.User, *resterrors.RestE
 
 	// When you use prepare, you not already execute the query on database, it's like to validate the query first
 	// its is (more fast) than when you get an error directly on your database
-	stmt, err := s.client.Prepare(query)
+	stmt, err := s.db.Prepare(query)
 	if err != nil {
 		errorCode := "Error 0006: "
 		logger.Error(fmt.Sprintf("%sError when trying to prepare the query statement in the Create user", errorCode), err)
@@ -175,7 +175,7 @@ func (s *userDBClient) Update(user entity.User) (*entity.User, *resterrors.RestE
 		WHERE 	id			= ?;
 	`
 
-	stmt, err := s.client.Prepare(query)
+	stmt, err := s.db.Prepare(query)
 	if err != nil {
 		errorCode := "Error 0009: "
 		logger.Error(fmt.Sprintf("%sError when trying to prepare the query statement in the Update user", errorCode), err)
@@ -201,7 +201,7 @@ func (s *userDBClient) Delete(id int64) *resterrors.RestErr {
 		WHERE 	id			= ?;
 	`
 
-	stmt, err := s.client.Prepare(query)
+	stmt, err := s.db.Prepare(query)
 	if err != nil {
 		errorCode := "Error 0011: "
 		logger.Error(fmt.Sprintf("%sError when trying to prepare the query statement in the Delete user", errorCode), err)
@@ -236,7 +236,7 @@ func (s *userDBClient) GetByEmailAndPassword(user entity.User) (*entity.User, *r
 		  AND   u.password	= ?
 		  AND   u.status	= ?;`
 
-	stmt, err := s.client.Prepare(query)
+	stmt, err := s.db.Prepare(query)
 	if err != nil {
 		errorCode := "Error 0013: "
 		logger.Error(fmt.Sprintf("%sError when trying to prepare the query statement in GetByEmailAndPassword", errorCode), err)
