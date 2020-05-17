@@ -16,4 +16,4 @@ microservice_user
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 
-.docker
+.docker/dbdata

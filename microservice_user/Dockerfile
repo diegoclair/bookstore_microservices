@@ -18,4 +18,4 @@ RUN chmod +x /wait
 
 EXPOSE 3000
 
-CMD ./microservice_user
+CMD /wait && ./microservice_user

@@ -36,15 +36,17 @@ func Instance() (contract.RepoManager, error) {
 	}
 	log.Println("Database successfully configured")
 
+	log.Println("Running the migrations")
 	driver := darwin.NewGenericDriver(db, darwin.MySQLDialect{})
 
 	d := darwin.New(driver, migrations.Migrations, nil)
 
-	log.Println("Running the migrations")
 	err = d.Migrate()
 	if err != nil {
 		return nil, err
 	}
+
+	log.Println("Migrations executed")
 
 	instance := &DBManager{
 		db: db,

@@ -12,16 +12,49 @@ var (
 				id INT AUTO_INCREMENT,
 				first_name VARCHAR(30) NOT NULL,
 				last_name VARCHAR(30) NOT NULL,
-				email VARCHAR(50),
-				password VARCHAR(100),
+				email VARCHAR(50) NOT NULL,
+				password VARCHAR(100) NOT NULL,
 				created_at TIMESTAMP,
-				PRIMARY KEY (id)
+
+				PRIMARY KEY (id),
+				UNIQUE INDEX ID_UNIQUE (id ASC),
+				UNIQUE INDEX EMAIL_UNIQUE (email ASC)
 			) ENGINE=InnoDB CHARACTER SET=utf8;`,
 		},
 		{
 			Version:     2,
 			Description: "Adding column status to table users",
-			Script:      "ALTER TABLE users ADD status VARCHAR(30) AFTER password;",
+			Script:      "ALTER TABLE users ADD COLUMN status VARCHAR(30) NOT NULL DEFAULT 'active' AFTER password;",
+		},
+		{
+			Version:     3,
+			Description: "Insert data to table users",
+			Script: `INSERT INTO users 
+				(
+					first_name, 
+					last_name, 
+					email, 
+					password) 
+				VALUES(
+					"Diego CLair", 
+					"Rodrigues", 
+					"diego93rodrigues@gmail.com",
+					"test123");`,
+		},
+		{
+			Version:     4,
+			Description: "Insert data to table users",
+			Script: `INSERT INTO users 
+				(
+					first_name, 
+					last_name, 
+					email, 
+					password) 
+				VALUES(
+					"User test", 
+					"Testing", 
+					"test@test.com",
+					"test123");`,
 		},
 	}
 )
