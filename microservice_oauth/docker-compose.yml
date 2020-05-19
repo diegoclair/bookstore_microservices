@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+
+  app:
+    container_name: microservice_oauth
+    build: .
+    command: ./.docker/entrypoint.sh
+    ports:
+      - 3001:3001
+    environment:
+      WAIT_HOSTS: db:9042
+      WAIT_HOSTS_TIMEOUT: 300
+      WAIT_SLEEP_INTERVAL: 15
+      WAIT_HOST_CONNECT_TIMEOUT: 30
+    depends_on:
+      - db
+    networks:
+      - app-network
+  
+  db:
+    container_name: microservice_oauth-db
+    image: cassandra:latest
+    restart: always
+    tty: true
+    ports:
+      - 9042:9042
+    volumes:
+      - ./.docker/dbdata:/var/lib/cassandra
+    environment:
+      - CASSANDRA_CQL_PORT_NUMBER=9042
+      - CASSANDRA_KEYSPACE=oauth
+      - CASSANDRA_USER=root
+      - CASSANDRA_PASSWORD=root
+    networks:
+      - app-network
+    
+networks:
+  app-network:
+    driver: bridge

@@ -1,6 +1,8 @@
 package main
 
 import (
+	"log"
+
 	"github.com/diegoclair/microservice_oauth/data"
 	"github.com/diegoclair/microservice_oauth/server"
 	"github.com/diegoclair/microservice_oauth/service"
@@ -12,6 +14,8 @@ var (
 )
 
 func main() {
+	log.Println("Reading the intial configs...")
+
 	db, err := data.Connect()
 	if err != nil {
 		panic(err)
