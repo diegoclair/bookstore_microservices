@@ -1,7 +1,6 @@
 package entity
 
 import (
-	"fmt"
 	"strings"
 
 	"github.com/diegoclair/go_utils-lib/resterrors"
@@ -39,7 +38,6 @@ func (user *User) Validate() *resterrors.RestErr {
 }
 
 func (user *User) validadePassword() *resterrors.RestErr {
-	fmt.Println("cheguei aqui", user.Password)
 	if user.Password == "" || len(user.Password) < 8 {
 		return resterrors.NewBadRequestError("Password need at least 8 caracters")
 	}

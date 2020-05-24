@@ -3,7 +3,7 @@ version: '3'
 services:
 
   app:
-    container_name: microservice_oauth
+    container_name: micro_oauth
     build: .
     command: ./.docker/entrypoint.sh
     ports:
@@ -17,9 +17,10 @@ services:
       - db
     networks:
       - app-network
+      - shared_net
   
   db:
-    container_name: microservice_oauth-db
+    container_name: micro_oauth-db
     image: cassandra:latest
     restart: always
     tty: true
@@ -38,3 +39,7 @@ services:
 networks:
   app-network:
     driver: bridge
+  #to communicate with others containers
+  shared_net:
+    external:
+      name: shared_net

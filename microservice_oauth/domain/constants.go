@@ -14,7 +14,7 @@ const (
 
 var (
 	UserRestClient = rest.RequestBuilder{
-		BaseURL: "http://localhost:3000",
-		Timeout: 100 * time.Millisecond,
+		BaseURL: "micro_user", //microservice micro_user ip
+		Timeout: 200 * time.Millisecond,
 	}
 )

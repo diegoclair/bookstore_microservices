@@ -26,35 +26,5 @@ var (
 			Description: "Adding column status to table users",
 			Script:      "ALTER TABLE users ADD COLUMN status VARCHAR(30) NOT NULL DEFAULT 'active' AFTER password;",
 		},
-		{
-			Version:     3,
-			Description: "Insert data to table users",
-			Script: `INSERT INTO users 
-				(
-					first_name, 
-					last_name, 
-					email, 
-					password) 
-				VALUES(
-					"Diego CLair", 
-					"Rodrigues", 
-					"diego93rodrigues@gmail.com",
-					"test123");`,
-		},
-		{
-			Version:     4,
-			Description: "Insert data to table users",
-			Script: `INSERT INTO users 
-				(
-					first_name, 
-					last_name, 
-					email, 
-					password) 
-				VALUES(
-					"User test", 
-					"Testing", 
-					"test@test.com",
-					"test123");`,
-		},
 	}
 )

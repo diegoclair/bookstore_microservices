@@ -22,19 +22,7 @@ func Instance() (contract.RepoManager, error) {
 	log.Println("Getting configs")
 	cfg := config.GetDBConfig()
 
-	systemCluster := getDBConfig(cfg)
-	//use system keyspace to create our keyspace oauth
-	systemCluster.Keyspace = cfg.DBDefault
-
-	log.Println("Creating database System Session...")
-
-	systemSession, err := systemCluster.CreateSession()
-	if err != nil {
-		return nil, err
-	}
-	systemSession.Close()
-
-	err = createInitialKeyspace(cfg, systemSession)
+	err := createInitialKeyspace(cfg)
 	if err != nil {
 		return nil, err
 	}
@@ -43,6 +31,7 @@ func Instance() (contract.RepoManager, error) {
 
 	cluster := getDBConfig(cfg)
 
+	//now that we have our keyspace oauth created, we can create a new session
 	cluster.Keyspace = cfg.DBName
 
 	session, err := cluster.CreateSession()
@@ -64,13 +53,26 @@ func Instance() (contract.RepoManager, error) {
 	return instance, nil
 }
 
-func createInitialKeyspace(cfg entity.InitialConfig, systemSession *gocql.Session) error {
+func createInitialKeyspace(cfg entity.InitialConfig) error {
+
+	log.Println("Creating database initial Session...")
+
+	//use initialCluster without keyspace to create our keyspace oauth
+	initialCluster := getDBConfig(cfg)
+
+	initialSession, err := initialCluster.CreateSession()
+	if err != nil {
+		return err
+	}
+
 	// Check if the table already exists. Create if table does not exist
 	log.Println("Creating new keyspace:", cfg.DBName)
 
-	systemSession.Query(`CREATE KEYSPACE IF NOT EXISTS oauth 
+	initialSession.Query(`CREATE KEYSPACE IF NOT EXISTS oauth 
 		WITH replication = {'class' : 'SimpleStrategy', 'replication_factor' : 1};
 	`).Exec()
+
+	initialSession.Close()
 
 	log.Println("Keyspace and table created successfully")
 	return nil
@@ -90,7 +92,7 @@ func createInitialTableAndData(cfg entity.InitialConfig, session *gocql.Session)
 			CREATE TABLE IF NOT EXISTS access_token (
 				access_token text, 
 				user_id int, 
-				clint_id int, 
+				client_id int, 
 				expires int,
 				PRIMARY KEY (access_token));
 		`).Exec()

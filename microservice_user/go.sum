@@ -19,8 +19,9 @@ github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSs
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/dgrijalva/jwt-go v3.2.0+incompatible/go.mod h1:E3ru+11k8xSBh+hMPgOLZmtrrCbhqsmaPHjLKYnJCaQ=
 github.com/dgryski/go-sip13 v0.0.0-20181026042036-e10d5fee7954/go.mod h1:vAd38F8PWV+bWy6jNmig1y/TA+kYO4g3RSRF0IAv0no=
-github.com/diegoclair/bookstore_oauth-go v1.0.1 h1:TVRisXS7tw4i+COPyTK02zIObLy194qzWfXse5yNfqs=
 github.com/diegoclair/bookstore_oauth-go v1.0.1/go.mod h1:j5IOsszZzDEBin8EoxXH/obYnEJnw1fR+4+70pkGuhA=
+github.com/diegoclair/bookstore_oauth-go v1.0.3 h1:SqqhRyA5inxhUj3crc2IjbS9rcPZoiqPVy8Y3JGyS3o=
+github.com/diegoclair/bookstore_oauth-go v1.0.3/go.mod h1:uAwll/nvUc+AUAkx+pMqQnMyYdgsN6P6GvXw2TDyulY=
 github.com/diegoclair/go_utils-lib v1.0.1 h1:C0Np0/F3g4xKvMSyOYCnYh9ab3xf3wTWd7IT67Pct4Q=
 github.com/diegoclair/go_utils-lib v1.0.1/go.mod h1:G8AaPnTzPNLTRB8UzMBenb7Ll1ZbFs0ELBLIl7YlIb8=
 github.com/federicoleon/golang-restclient v0.0.0-20191104170228-162ed620df66 h1:QESWlOIiziWcM4bCvtT7TFg4PXjudKMnO3ArjxuIJj4=

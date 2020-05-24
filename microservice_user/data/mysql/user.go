@@ -246,7 +246,6 @@ func (s *userDBClient) GetByEmailAndPassword(user entity.User) (*entity.User, *r
 
 	// If we use result, err := stmt.Query(user.ID) instead QueryRow, then we need to close the connection defer result.Close() and check if we have some err
 	// to get only one register on database, is better to use queryRow
-	fmt.Println(user.Email, user.Password)
 	result := stmt.QueryRow(user.Email, user.Password, domain.StatusActive)
 	err = result.Scan(
 		&user.ID,

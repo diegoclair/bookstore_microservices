@@ -15,7 +15,6 @@ func GetDBConfig() (config entity.InitialConfig) {
 	config.Host = cast.ToString(viper.Get("DB_HOST"))
 	config.Port = cast.ToString(viper.Get("DB_PORT"))
 	config.DBName = cast.ToString(viper.Get("DB_NAME"))
-	config.DBDefault = cast.ToString(viper.Get("DB_DEFAULT"))
 
 	return
 }

@@ -3,7 +3,7 @@ version: '3'
 services:
 
   app:
-    container_name: microservice_user
+    container_name: micro_user
     build: .
     command: ./.docker/entrypoint.sh
     ports:
@@ -17,9 +17,10 @@ services:
       - db
     networks:
       - app-network
+      - shared_net
   
   db:
-    container_name: microservice_user-db
+    container_name: micro_user-db
     image: mysql:5.7
     #this command is important to mysql to run OK
     command: --innodb-use-native-aio=0
@@ -40,3 +41,7 @@ services:
 networks:
   app-network:
     driver: bridge
+  #to communicate with others containers
+  shared_net:
+    external:
+      name: shared_net

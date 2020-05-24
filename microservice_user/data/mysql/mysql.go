@@ -46,6 +46,10 @@ func Instance() (contract.RepoManager, error) {
 		return nil, err
 	}
 
+	if err != nil {
+		return nil, err
+	}
+
 	log.Println("Migrations executed")
 
 	instance := &DBManager{
