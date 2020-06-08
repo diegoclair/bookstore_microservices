@@ -1,5 +1,5 @@
 <h4 align="center"> 
-	Bookstore microservices 📝 
+	Bookstore microservices 📚 
 </h4>
 <p align="center">
   <a href="https://www.linkedin.com/in/diegoclair/">
