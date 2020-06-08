@@ -3,7 +3,7 @@
 </h4>
 <p align="center">
 	
-  <a href="https://github.com/diegoclair/next-level-week/commits/master">
+  <a href="https://github.com/diegoclair/bookstore_microservices/commits/master">
     <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/diegoclair/bookstore_microservices?label=Last%20commit">
   </a>
 
