@@ -17,11 +17,13 @@ This microservice also use oauth lib to authenticate a user: github.com/diegocla
 ### Requirements:
 * To run this project you need to have the <b>docker</b> installed in your computer.  
 * To install docker, [click here](https://docs.docker.com/get-docker/)
+
 ### Permissions first:  
-* For <b>Unix</b> enviroment run the comand:  
+
+* For <b>Unix</b> enviroment, run the comand:  
 <b>```chmod +x .docker/entrypoint.sh```</b>  
 
-* For <b>Windows</b> enviroment run the comand:   
+* For <b>Windows</b> enviroment, run the comand:   
 <b>```dos2unix +x .docker/entrypoint.sh```</b>  
   
 ### Creating a shared network:
