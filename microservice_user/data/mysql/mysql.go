@@ -66,5 +66,5 @@ func (c *DBManager) Ping() contract.PingRepo {
 
 //User returns a session to use cassadra querys
 func (c *DBManager) User() contract.UserRepo {
-	return newUserDBClient(c.db)
+	return newUserRepo(c.db)
 }

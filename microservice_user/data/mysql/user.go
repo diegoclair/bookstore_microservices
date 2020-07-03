@@ -12,19 +12,19 @@ import (
 	"github.com/diegoclair/microservice_user/utils/mysqlutils"
 )
 
-type userDBClient struct {
+type userRepo struct {
 	db *sql.DB
 }
 
-// newUserDBClient returns a instance of dbrepo
-func newUserDBClient(db *sql.DB) *userDBClient {
-	return &userDBClient{
+// newUserRepo returns a instance of dbrepo
+func newUserRepo(db *sql.DB) *userRepo {
+	return &userRepo{
 		db: db,
 	}
 }
 
 //GetByID - get a user by ID
-func (s *userDBClient) GetByID(id int64) (*entity.User, *resterrors.RestErr) {
+func (s *userRepo) GetByID(id int64) (*entity.User, *resterrors.RestErr) {
 
 	query := `
 		SELECT 	u.id,
@@ -69,7 +69,7 @@ func (s *userDBClient) GetByID(id int64) (*entity.User, *resterrors.RestErr) {
 }
 
 // GetUserByStatus return a list of all users by status
-func (s *userDBClient) GetUserByStatus(status string) (users []entity.User, restErr *resterrors.RestErr) {
+func (s *userRepo) GetUserByStatus(status string) (users []entity.User, restErr *resterrors.RestErr) {
 
 	query := `
 			SELECT 	u.id,
@@ -126,7 +126,7 @@ func (s *userDBClient) GetUserByStatus(status string) (users []entity.User, rest
 }
 
 // Create - to create a user on database
-func (s *userDBClient) Create(user entity.User) (*entity.User, *resterrors.RestErr) {
+func (s *userRepo) Create(user entity.User) (*entity.User, *resterrors.RestErr) {
 
 	query := `
 		INSERT INTO users 
@@ -164,7 +164,7 @@ func (s *userDBClient) Create(user entity.User) (*entity.User, *resterrors.RestE
 }
 
 // Update - to update a user on database
-func (s *userDBClient) Update(user entity.User) (*entity.User, *resterrors.RestErr) {
+func (s *userRepo) Update(user entity.User) (*entity.User, *resterrors.RestErr) {
 
 	query := `
 		UPDATE users
@@ -194,7 +194,7 @@ func (s *userDBClient) Update(user entity.User) (*entity.User, *resterrors.RestE
 }
 
 // Delete - to delete a user on database
-func (s *userDBClient) Delete(id int64) *resterrors.RestErr {
+func (s *userRepo) Delete(id int64) *resterrors.RestErr {
 
 	query := `
 		DELETE FROM users
@@ -220,7 +220,7 @@ func (s *userDBClient) Delete(id int64) *resterrors.RestErr {
 }
 
 //GetByEmailAndPassword - get a user by their email and password
-func (s *userDBClient) GetByEmailAndPassword(user entity.User) (*entity.User, *resterrors.RestErr) {
+func (s *userRepo) GetByEmailAndPassword(user entity.User) (*entity.User, *resterrors.RestErr) {
 
 	query := `
 		SELECT 	u.id,
