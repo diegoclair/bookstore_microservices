@@ -59,12 +59,12 @@ func Instance() (contract.RepoManager, error) {
 	return instance, nil
 }
 
-//Ping returns a session to use cassadra querys
+//Ping returns a session to use mysql queries
 func (c *DBManager) Ping() contract.PingRepo {
 	return nil
 }
 
-//User returns a session to use cassadra querys
+//User returns a session to use mysql queries
 func (c *DBManager) User() contract.UserRepo {
 	return newUserRepo(c.db)
 }
