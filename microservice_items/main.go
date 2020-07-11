@@ -14,7 +14,7 @@ func main() {
 
 	server := &http.Server{
 		Handler: srv,
-		Addr:    "127.0.0.1:3003",
+		Addr:    "127.0.0.1:3002",
 	}
 
 	if err := server.ListenAndServe(); err != nil {

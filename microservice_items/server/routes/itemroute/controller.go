@@ -1,13 +1,13 @@
 package itemroute
 
 import (
-	"fmt"
 	"net/http"
 	"sync"
 
 	"github.com/diegoclair/bookstore_oauth-go/oauth"
 	"github.com/diegoclair/microservice_items/domain/contract"
 	"github.com/diegoclair/microservice_items/domain/entity"
+	"github.com/diegoclair/microservice_items/utils/httputils"
 )
 
 var (
@@ -33,7 +33,7 @@ func NewController(itemService contract.ItemService) *Controller {
 func (s *Controller) handleCreate(w http.ResponseWriter, r *http.Request) {
 
 	if err := oauth.AuthenticateRequest(r); err != nil {
-		//TODO: Return error to the caller
+		httputils.RespondError(w, *err)
 		return
 	}
 
@@ -43,12 +43,12 @@ func (s *Controller) handleCreate(w http.ResponseWriter, r *http.Request) {
 
 	response, err := s.itemService.Create(item)
 	if err != nil {
-		//TODO: Return error json top the user
+		httputils.RespondError(w, *err)
 		return
 	}
 
-	fmt.Println(response)
-	//TODO: return created item as json with HTTP status 201 - created
+	httputils.RespondJSON(w, http.StatusCreated, response)
+
 }
 
 func (s *Controller) handleGetByID(w http.ResponseWriter, r *http.Request) {
