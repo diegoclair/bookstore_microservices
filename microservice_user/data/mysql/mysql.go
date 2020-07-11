@@ -59,12 +59,12 @@ func Instance() (contract.RepoManager, error) {
 	return instance, nil
 }
 
-//Ping returns a session to use mysql queries
+//Ping returns the ping set
 func (c *DBManager) Ping() contract.PingRepo {
 	return nil
 }
 
-//User returns a session to use mysql queries
+//User returns the user set
 func (c *DBManager) User() contract.UserRepo {
 	return newUserRepo(c.db)
 }
