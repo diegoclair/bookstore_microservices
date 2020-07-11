@@ -11,7 +11,7 @@ This microservice has the main responsabilities:
 * Get user by ID
 * Get users by status (active, inactive)
 
-This microservice also use oauth lib to authenticate a user: github.com/diegoclair/bookstore_oauth-go/oauth</b></b> 
+This microservice also use [oauth lib](github.com/diegoclair/bookstore_oauth-go/oauth) to authenticate the user requester.</b></b> 
 
 ## Start application
 ### Requirements:
