@@ -8,9 +8,9 @@ type Service struct {
 }
 
 // New returns a new domain Service instance
-func New( /*db contract.RepoManager*/ ) *Service {
+func New(db contract.RepoManager) *Service {
 	svc := new(Service)
-	/*svc.db = db*/
+	svc.db = db
 
 	return svc
 }
