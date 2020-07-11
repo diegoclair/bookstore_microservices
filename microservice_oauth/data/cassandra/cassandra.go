@@ -130,7 +130,7 @@ func getDBConfig(cfg entity.InitialConfig) *gocql.ClusterConfig {
 	return cluster
 }
 
-//AccessToken returns a session to use cassadra querys
+//AccessToken returns a session to use cassadra queries
 func (c *DBManager) AccessToken() contract.AccessTokenRepo {
 	return newAccessTokenDBSession(c.session)
 }
