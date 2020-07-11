@@ -1,10 +1,14 @@
 package itemroute
 
 import (
+	"encoding/json"
+	"io/ioutil"
+	"log"
 	"net/http"
 	"sync"
 
 	"github.com/diegoclair/bookstore_oauth-go/oauth"
+	"github.com/diegoclair/go_utils-lib/resterrors"
 	"github.com/diegoclair/microservice_items/domain/contract"
 	"github.com/diegoclair/microservice_items/domain/entity"
 	"github.com/diegoclair/microservice_items/utils/httputils"
@@ -37,18 +41,33 @@ func (s *Controller) handleCreate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	item := entity.Item{
-		Seller: oauth.GetCallerID(r),
+	requestBody, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		log.Println(err)
+		restErr := resterrors.NewBadRequestError("Invalid request body")
+		httputils.RespondError(w, *restErr)
+		return
+	}
+	defer r.Body.Close()
+
+	var item entity.Item
+	err = json.Unmarshal(requestBody, &item)
+	if err != nil {
+		log.Println(err)
+		restErr := resterrors.NewBadRequestError("Invalid item json body")
+		httputils.RespondError(w, *restErr)
+		return
 	}
 
-	response, err := s.itemService.Create(item)
+	item.Seller = oauth.GetCallerID(r)
+
+	response, createErr := s.itemService.Create(item)
 	if err != nil {
-		httputils.RespondError(w, *err)
+		httputils.RespondError(w, *createErr)
 		return
 	}
 
 	httputils.RespondJSON(w, http.StatusCreated, response)
-
 }
 
 func (s *Controller) handleGetByID(w http.ResponseWriter, r *http.Request) {

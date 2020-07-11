@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"time"
 
 	"github.com/diegoclair/microservice_items/server"
 	"github.com/diegoclair/microservice_items/service"
@@ -13,8 +14,11 @@ func main() {
 	srv := server.InitServer(svc)
 
 	server := &http.Server{
-		Handler: srv,
-		Addr:    "127.0.0.1:3002",
+		Addr:         "localhost:3002",
+		WriteTimeout: 500 * time.Millisecond,
+		ReadTimeout:  2 * time.Second,
+		IdleTimeout:  60 * time.Second,
+		Handler:      srv,
 	}
 
 	if err := server.ListenAndServe(); err != nil {
