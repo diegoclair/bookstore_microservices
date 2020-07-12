@@ -7,12 +7,12 @@ import (
 
 // AccessTokenService holds access token operations
 type AccessTokenService interface {
-	GetByID(userID string) (*entity.AccessToken, *resterrors.RestErr)
-	Create(token entity.AccessTokenRequest) (*entity.AccessToken, *resterrors.RestErr)
-	UpdateExpirationTime(token entity.AccessToken) *resterrors.RestErr
+	GetByID(userID string) (*entity.AccessToken, resterrors.RestErr)
+	Create(token entity.AccessTokenRequest) (*entity.AccessToken, resterrors.RestErr)
+	UpdateExpirationTime(token entity.AccessToken) resterrors.RestErr
 }
 
 // UserAPIService holds access token operations
 type UserAPIService interface {
-	LoginUser(email string, password string) (*entity.APIUser, *resterrors.RestErr)
+	LoginUser(email string, password string) (*entity.APIUser, resterrors.RestErr)
 }

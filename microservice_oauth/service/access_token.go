@@ -27,7 +27,7 @@ func newAccessTokenService(svc *Service, api contract.UserAPIService) contract.A
 	}
 }
 
-func (s *accessToken) GetByID(accessTokenID string) (*entity.AccessToken, *resterrors.RestErr) {
+func (s *accessToken) GetByID(accessTokenID string) (*entity.AccessToken, resterrors.RestErr) {
 
 	accessTokenID = strings.TrimSpace(accessTokenID)
 	if len(accessTokenID) == 0 {
@@ -36,7 +36,7 @@ func (s *accessToken) GetByID(accessTokenID string) (*entity.AccessToken, *reste
 	return s.svc.db.AccessToken().GetByID(accessTokenID)
 }
 
-func (s *accessToken) Create(request entity.AccessTokenRequest) (*entity.AccessToken, *resterrors.RestErr) {
+func (s *accessToken) Create(request entity.AccessTokenRequest) (*entity.AccessToken, resterrors.RestErr) {
 	if err := request.Validate(); err != nil {
 		return nil, err
 	}
@@ -59,7 +59,7 @@ func (s *accessToken) Create(request entity.AccessTokenRequest) (*entity.AccessT
 	return &at, nil
 }
 
-func (s *accessToken) UpdateExpirationTime(token entity.AccessToken) *resterrors.RestErr {
+func (s *accessToken) UpdateExpirationTime(token entity.AccessToken) resterrors.RestErr {
 	if err := token.Validate(); err != nil {
 		return err
 	}

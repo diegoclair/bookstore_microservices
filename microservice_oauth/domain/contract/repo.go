@@ -12,7 +12,7 @@ type RepoManager interface {
 
 // AccessTokenRepo defines the data set for access token
 type AccessTokenRepo interface {
-	GetByID(string) (*entity.AccessToken, *resterrors.RestErr)
-	Create(token entity.AccessToken) *resterrors.RestErr
-	UpdateExpirationTime(token entity.AccessToken) *resterrors.RestErr
+	GetByID(string) (*entity.AccessToken, resterrors.RestErr)
+	Create(token entity.AccessToken) resterrors.RestErr
+	UpdateExpirationTime(token entity.AccessToken) resterrors.RestErr
 }

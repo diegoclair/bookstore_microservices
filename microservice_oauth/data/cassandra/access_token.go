@@ -17,7 +17,7 @@ func newAccessTokenDBSession(session *gocql.Session) *accessTokenDBSession {
 	}
 }
 
-func (s *accessTokenDBSession) GetByID(id string) (*entity.AccessToken, *resterrors.RestErr) {
+func (s *accessTokenDBSession) GetByID(id string) (*entity.AccessToken, resterrors.RestErr) {
 
 	query := `
 		SELECT 	access_token, 
@@ -44,7 +44,7 @@ func (s *accessTokenDBSession) GetByID(id string) (*entity.AccessToken, *resterr
 	return &result, nil
 }
 
-func (s *accessTokenDBSession) Create(at entity.AccessToken) *resterrors.RestErr {
+func (s *accessTokenDBSession) Create(at entity.AccessToken) resterrors.RestErr {
 
 	query := `
 		INSERT INTO	access_token
@@ -76,7 +76,7 @@ func (s *accessTokenDBSession) Create(at entity.AccessToken) *resterrors.RestErr
 	return nil
 }
 
-func (s *accessTokenDBSession) UpdateExpirationTime(at entity.AccessToken) *resterrors.RestErr {
+func (s *accessTokenDBSession) UpdateExpirationTime(at entity.AccessToken) resterrors.RestErr {
 
 	query := `
 		UPDATE	access_token

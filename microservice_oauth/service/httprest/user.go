@@ -18,7 +18,7 @@ func NewUserAPI() contract.UserAPIService {
 	return &user{}
 }
 
-func (s *user) LoginUser(email, password string) (*entity.APIUser, *resterrors.RestErr) {
+func (s *user) LoginUser(email, password string) (*entity.APIUser, resterrors.RestErr) {
 
 	body := entity.APIUserLoginRequest{
 		Email:    email,
@@ -39,7 +39,7 @@ func (s *user) LoginUser(email, password string) (*entity.APIUser, *resterrors.R
 		if err != nil {
 			return nil, resterrors.NewInternalServerError(fmt.Sprintf("%sError when trying to unmarshal the login user response", errCode))
 		}
-		return nil, &restErr
+		return nil, restErr
 	}
 	var user entity.APIUser
 	if err := json.Unmarshal(response.Bytes(), &user); err != nil {

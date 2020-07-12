@@ -34,7 +34,7 @@ func NewController(accessTokenService contract.AccessTokenService) *Controller {
 func (s *Controller) handleGetByID(c *gin.Context) {
 	accessToken, err := s.accessTokenService.GetByID(c.Param("access_token_id"))
 	if err != nil {
-		c.JSON(err.StatusCode, err)
+		c.JSON(err.StatusCode(), err)
 		return
 	}
 
@@ -47,12 +47,12 @@ func (s *Controller) handleCreate(c *gin.Context) {
 
 	if err := c.ShouldBindJSON(&request); err != nil {
 		restErr := resterrors.NewBadRequestError("Error 0010: Invalid Json Body Request")
-		c.JSON(restErr.StatusCode, restErr)
+		c.JSON(restErr.StatusCode(), restErr)
 		return
 	}
 	accessToken, err := s.accessTokenService.Create(request)
 	if err != nil {
-		c.JSON(err.StatusCode, err)
+		c.JSON(err.StatusCode(), err)
 		return
 	}
 

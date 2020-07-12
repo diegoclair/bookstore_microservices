@@ -25,7 +25,7 @@ type AccessTokenRequest struct {
 }
 
 //Validate checks if the access token request is valid
-func (at *AccessTokenRequest) Validate() *resterrors.RestErr {
+func (at *AccessTokenRequest) Validate() resterrors.RestErr {
 	switch at.GrantType {
 	case domain.GrantTypePassowrd:
 		break
@@ -50,7 +50,7 @@ type AccessToken struct {
 }
 
 //Validate checks if the token is valid
-func (at *AccessToken) Validate() *resterrors.RestErr {
+func (at *AccessToken) Validate() resterrors.RestErr {
 	at.AccessToken = strings.TrimSpace(at.AccessToken)
 	if at.AccessToken == "" {
 		return resterrors.NewBadRequestError("Error 0006: Invalid access token")
