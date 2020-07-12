@@ -17,7 +17,8 @@ This microservice also use [oauth lib](https://github.com/diegoclair/go_oauth-li
 ## Start application
 ### Requirements:
 * To run this project you need to have the <b>docker</b> installed in your computer.  
-* To install docker, [click here](https://docs.docker.com/get-docker/)
+  - To install docker, [click here](https://docs.docker.com/get-docker/)
+* To run this microservice, you need first to run the <b>[microservice_oauth](https://github.com/diegoclair/bookstore_microservices/tree/master/microservice_oauth)</b>
 
 ### Permissions first:  
 

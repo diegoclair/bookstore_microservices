@@ -1,10 +1,10 @@
 package elasticsearch
 
 import (
-	"log"
 	"time"
 
 	"github.com/diegoclair/microservice_items/domain/contract"
+	"github.com/diegoclair/microservice_items/logger"
 	"github.com/olivere/elastic"
 )
 
@@ -16,7 +16,7 @@ type DBManager struct {
 //Instance retunrs an instance of a RepoManager
 func Instance() (contract.RepoManager, error) {
 
-	log.Println("Connecting to database...")
+	logger.Info("Configuring the database...")
 
 	client, err := elastic.NewClient(
 		elastic.SetURL("http://db:9200"), //db is the elastic service  in docker-compose
@@ -28,18 +28,13 @@ func Instance() (contract.RepoManager, error) {
 		return nil, err
 	}
 
-	log.Println("Database successfully configured...")
+	logger.Info("Database successfully configured...")
 
 	instance := &DBManager{
 		db: client,
 	}
 	return instance, nil
 }
-
-/* func (c *esClient) Index(interface{}) (*elastic.IndexResponse, error) {
-	ctx := context.Background()
-	return c.client.Index().Do(ctx)
-} */
 
 //Item returns the item set
 func (c *DBManager) Item() contract.ItemRepo {

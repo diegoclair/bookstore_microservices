@@ -21,10 +21,11 @@ services:
   
   db:
     container_name: micro_items-db
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.1.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.1.1
     ports:
       - 9200:9200
     environment:
+      - cluster.name=elastic-micro-items
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - discovery.type=single-node

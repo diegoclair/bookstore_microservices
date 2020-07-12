@@ -1,11 +1,11 @@
 package main
 
 import (
-	"log"
 	"net/http"
 	"time"
 
 	"github.com/diegoclair/microservice_items/data"
+	"github.com/diegoclair/microservice_items/logger"
 	"github.com/diegoclair/microservice_items/server"
 	"github.com/diegoclair/microservice_items/service"
 )
@@ -28,7 +28,7 @@ func main() {
 		Handler:      srv,
 	}
 
-	log.Println("Listening on port 3002...")
+	logger.Info("About to start the application on port 3002...")
 
 	if err := server.ListenAndServe(); err != nil {
 		panic(err)

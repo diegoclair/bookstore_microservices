@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"sync"
 
-	"github.com/diegoclair/bookstore_oauth-go/oauth"
+	"github.com/diegoclair/go_oauth-lib/oauth"
 	"github.com/diegoclair/go_utils-lib/resterrors"
 	"github.com/diegoclair/microservice_items/domain/contract"
 	"github.com/diegoclair/microservice_items/domain/entity"
@@ -41,6 +41,13 @@ func (s *Controller) handleCreate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	sellerID := oauth.GetCallerID(r)
+	if sellerID == 0 {
+		restErr := resterrors.NewUnauthorizedError("Unable to retrieve user information from given access_token")
+		httputils.RespondError(w, *restErr)
+		return
+	}
+
 	requestBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		log.Println(err)
@@ -59,10 +66,10 @@ func (s *Controller) handleCreate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	item.Seller = oauth.GetCallerID(r)
+	item.Seller = sellerID
 
 	response, createErr := s.itemService.Create(item)
-	if err != nil {
+	if createErr != nil {
 		httputils.RespondError(w, *createErr)
 		return
 	}
