@@ -38,8 +38,9 @@ github.com/dgrijalva/jwt-go v3.2.0+incompatible/go.mod h1:E3ru+11k8xSBh+hMPgOLZm
 github.com/dgryski/go-sip13 v0.0.0-20181026042036-e10d5fee7954/go.mod h1:vAd38F8PWV+bWy6jNmig1y/TA+kYO4g3RSRF0IAv0no=
 github.com/diegoclair/go_oauth-lib v1.0.8 h1:xLPY1k0zq7hiyK353eNyYdja+URANGiP5q2EfZBIGWQ=
 github.com/diegoclair/go_oauth-lib v1.0.8/go.mod h1:nLfIh3BuBqNmG1iKTOa4nxYw16eYPf11AUCtO0UUix0=
-github.com/diegoclair/go_utils-lib v1.0.5 h1:Fh7TVMHkd7CU1kdporcEZXGlhsDpJ4YPFlPCXbpnYTE=
 github.com/diegoclair/go_utils-lib v1.0.5/go.mod h1:eCa15VCruDL3/+GY5VLHUCq+OAKIwZ9uL+cw8WqBYzA=
+github.com/diegoclair/go_utils-lib v1.0.6 h1:h/pSVfsz6nFeD/qMPZ7c2TDCzSe+ZTZnINcKtD8tEAs=
+github.com/diegoclair/go_utils-lib v1.0.6/go.mod h1:eCa15VCruDL3/+GY5VLHUCq+OAKIwZ9uL+cw8WqBYzA=
 github.com/fatih/color v1.7.0/go.mod h1:Zm6kSWBoL9eyXnKyktHP6abPY2pDugNf5KwzbycvMj4=
 github.com/federicoleon/golang-restclient v0.0.0-20191104170228-162ed620df66 h1:QESWlOIiziWcM4bCvtT7TFg4PXjudKMnO3ArjxuIJj4=
 github.com/federicoleon/golang-restclient v0.0.0-20191104170228-162ed620df66/go.mod h1:lvjF6h5LrES4h39ha/njlBBBqCmISh6BNSEiXH+mT5k=
