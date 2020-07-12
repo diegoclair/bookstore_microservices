@@ -1,0 +1,3 @@
+# this is necessary to you not get error when trying to run docker-compose build for example
+# and we don't need this in your image
+.docker/dbdata

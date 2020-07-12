@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+
+  app:
+    container_name: micro_items
+    build: .
+    command: ./.docker/entrypoint.sh
+    ports:
+      - 3002:3002
+    environment:
+      WAIT_HOSTS: db:9200
+      WAIT_HOSTS_TIMEOUT: 300
+      WAIT_SLEEP_INTERVAL: 10
+      WAIT_HOST_CONNECT_TIMEOUT: 30
+    depends_on:
+      - db
+    networks:
+      - app-network
+      - shared_net
+  
+  db:
+    container_name: micro_items-db
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.1.1
+    ports:
+      - 9200:9200
+    environment:
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - discovery.type=single-node
+    tty : true 
+    volumes:
+      - ./.docker/dbdata:/etc/elasticsearch/data
+
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+  #to communicate with others containers
+  shared_net:
+    external:
+      name: shared_net

@@ -19,7 +19,7 @@ func Instance() (contract.RepoManager, error) {
 	log.Println("Connecting to database...")
 
 	client, err := elastic.NewClient(
-		elastic.SetURL("http://127.0.0.1:9200"),
+		elastic.SetURL("http://db:9200"), //db is the elastic service  in docker-compose
 		elastic.SetHealthcheckInterval(10*time.Second),
 		//elastic.SetErrorLog(log.New(os.Stderr, "ELASTIC ", log.LstdFlags)),
 		//elastic.SetInfoLog(log.New(os.Stdout, "", log.LstdFlags)),
