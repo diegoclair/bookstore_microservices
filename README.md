@@ -29,9 +29,14 @@ The bookstore microservices contains 3 microservices that are using golang progr
 * Eslasticsearch DB
 
 ## Microservices
-1) User microservice ✔️
-2) Oauth microservice ✔️
-3) Items microservice 🚧
+1) [User microservice](https://github.com/diegoclair/bookstore_microservices/tree/master/microservice_user) ✔️
+2) [Oauth microservice](https://github.com/diegoclair/bookstore_microservices/tree/master/microservice_oauth) ✔️
+3) [Items microservice](https://github.com/diegoclair/bookstore_microservices/tree/master/microservice_items) 🚧
+
+## Libraries
+1) [Utils library](https://github.com/diegoclair/go_utils-lib) ✔️
+2) [Oauth library](https://github.com/diegoclair/go_oauth-lib) ✔️
+
 
 
 ## Status
