@@ -3,8 +3,8 @@ package elasticsearch
 import (
 	"time"
 
+	"github.com/diegoclair/go_utils-lib/logger"
 	"github.com/diegoclair/microservice_items/domain/contract"
-	"github.com/diegoclair/microservice_items/logger"
 	"github.com/olivere/elastic"
 )
 
@@ -16,13 +16,14 @@ type DBManager struct {
 //Instance retunrs an instance of a RepoManager
 func Instance() (contract.RepoManager, error) {
 
+	log := logger.GetLogger()
 	logger.Info("Configuring the database...")
 
 	client, err := elastic.NewClient(
 		elastic.SetURL("http://db:9200"), //db is the elastic service  in docker-compose
 		elastic.SetHealthcheckInterval(10*time.Second),
-		//elastic.SetErrorLog(log.New(os.Stderr, "ELASTIC ", log.LstdFlags)),
-		//elastic.SetInfoLog(log.New(os.Stdout, "", log.LstdFlags)),
+		elastic.SetErrorLog(log),
+		elastic.SetInfoLog(log),
 	)
 	if err != nil {
 		return nil, err

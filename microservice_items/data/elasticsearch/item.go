@@ -4,9 +4,9 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/diegoclair/go_utils-lib/logger"
 	"github.com/diegoclair/go_utils-lib/resterrors"
 	"github.com/diegoclair/microservice_items/domain/entity"
-	"github.com/diegoclair/microservice_items/logger"
 	"github.com/olivere/elastic"
 )
 

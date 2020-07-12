@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/diegoclair/go_utils-lib/logger"
 	"github.com/diegoclair/microservice_items/data"
-	"github.com/diegoclair/microservice_items/logger"
 	"github.com/diegoclair/microservice_items/server"
 	"github.com/diegoclair/microservice_items/service"
 )
@@ -31,6 +31,7 @@ func main() {
 	logger.Info("About to start the application on port 3002...")
 
 	if err := server.ListenAndServe(); err != nil {
+		logger.Error("Error to start", err)
 		panic(err)
 	}
 
