@@ -1,8 +1,8 @@
 package main
 
 import (
+	"github.com/diegoclair/go_utils-lib/logger"
 	"github.com/diegoclair/microservice_user/data"
-	"github.com/diegoclair/microservice_user/logger"
 	"github.com/diegoclair/microservice_user/server"
 
 	"github.com/diegoclair/microservice_user/service"

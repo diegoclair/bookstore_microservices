@@ -6,10 +6,11 @@ import (
 	"log"
 
 	"github.com/GuiaBolso/darwin"
+	"github.com/diegoclair/go_utils-lib/logger"
 	"github.com/diegoclair/microservice_user/data/migrations"
 	"github.com/diegoclair/microservice_user/domain/contract"
 	"github.com/diegoclair/microservice_user/infra/config"
-	_ "github.com/go-sql-driver/mysql" //Used to connect to database
+	"github.com/go-sql-driver/mysql"
 )
 
 // DBManager is the MySQL connection manager
@@ -31,12 +32,19 @@ func Instance() (contract.RepoManager, error) {
 	if err != nil {
 		return nil, err
 	}
-	if err := db.Ping(); err != nil {
+
+	err = db.Ping()
+	if err != nil {
 		return nil, err
 	}
-	log.Println("Database successfully configured")
 
-	log.Println("Running the migrations")
+	err = mysql.SetLogger(logger.GetLogger())
+	if err != nil {
+		return nil, err
+	}
+	logger.Info("Database successfully configured")
+
+	logger.Info("Running the migrations")
 	driver := darwin.NewGenericDriver(db, darwin.MySQLDialect{})
 
 	d := darwin.New(driver, migrations.Migrations, nil)
@@ -46,11 +54,7 @@ func Instance() (contract.RepoManager, error) {
 		return nil, err
 	}
 
-	if err != nil {
-		return nil, err
-	}
-
-	log.Println("Migrations executed")
+	logger.Info("Migrations executed")
 
 	instance := &DBManager{
 		db: db,

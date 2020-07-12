@@ -4,10 +4,10 @@ import (
 	"database/sql"
 	"fmt"
 
+	"github.com/diegoclair/go_utils-lib/logger"
 	"github.com/diegoclair/go_utils-lib/resterrors"
 	"github.com/diegoclair/microservice_user/domain"
 	"github.com/diegoclair/microservice_user/domain/entity"
-	"github.com/diegoclair/microservice_user/logger"
 
 	"github.com/diegoclair/microservice_user/utils/mysqlutils"
 )

@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"sync"
 
-	"github.com/diegoclair/bookstore_oauth-go/oauth"
+	"github.com/diegoclair/go_oauth-lib/oauth"
 	"github.com/diegoclair/go_utils-lib/resterrors"
 	"github.com/diegoclair/microservice_user/domain/contract"
 	"github.com/diegoclair/microservice_user/domain/entity"
