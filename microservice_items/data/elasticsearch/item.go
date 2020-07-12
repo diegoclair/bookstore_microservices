@@ -27,17 +27,17 @@ func newItemRepo(db *elastic.Client) *itemRepo {
 }
 
 //Index - to insert a index in a db
-func (c *itemRepo) Index(index string, esType string, doc interface{}) (*elastic.IndexResponse, error) {
+func (c *itemRepo) Index(docIndex string, docType string, doc interface{}) (*elastic.IndexResponse, error) {
 
 	ctx := context.Background()
 
 	result, err := c.db.Index().
-		Index(index).
-		Type(esType).
+		Index(docIndex).
+		Type(docType).
 		BodyJson(doc).
 		Do(ctx)
 	if err != nil {
-		logger.Error(fmt.Sprintf("Error when trying to index document in index %s", index), err)
+		logger.Error(fmt.Sprintf("Error when trying to index document in index %s", docIndex), err)
 		return nil, err
 	}
 

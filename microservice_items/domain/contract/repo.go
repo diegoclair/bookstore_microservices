@@ -13,6 +13,6 @@ type RepoManager interface {
 
 // ItemRepo defines the data set for items
 type ItemRepo interface {
-	Index(index string, esType string, doc interface{}) (*elastic.IndexResponse, error)
+	Index(docIndex string, docType string, doc interface{}) (*elastic.IndexResponse, error)
 	Save(i entity.Item) (item entity.Item, restErr resterrors.RestErr)
 }
