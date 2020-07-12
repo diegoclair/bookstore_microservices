@@ -1,6 +1,6 @@
-<h4 align="center"> 
+<h2 align="center"> 
 	Bookstore microservices 📚 
-</h4>
+</h2>
 <p align="center">
 	
   <a href="https://github.com/diegoclair/bookstore_microservices/commits/master">
