@@ -44,7 +44,7 @@ func (c *itemRepo) Index(index string, esType string, doc interface{}) (*elastic
 	return result, nil
 }
 
-func (c *itemRepo) Save(i entity.Item) (retVal entity.Item, restErr *resterrors.RestErr) {
+func (c *itemRepo) Save(i entity.Item) (retVal entity.Item, restErr resterrors.RestErr) {
 
 	result, err := c.Index(indexItem, esType, i)
 	if err != nil {

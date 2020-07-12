@@ -37,14 +37,14 @@ func NewController(itemService contract.ItemService) *Controller {
 func (s *Controller) handleCreate(w http.ResponseWriter, r *http.Request) {
 
 	if err := oauth.AuthenticateRequest(r); err != nil {
-		httputils.RespondError(w, *err)
+		httputils.RespondError(w, err)
 		return
 	}
 
 	sellerID := oauth.GetCallerID(r)
 	if sellerID == 0 {
 		restErr := resterrors.NewUnauthorizedError("Unable to retrieve user information from given access_token")
-		httputils.RespondError(w, *restErr)
+		httputils.RespondError(w, restErr)
 		return
 	}
 
@@ -52,7 +52,7 @@ func (s *Controller) handleCreate(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println(err)
 		restErr := resterrors.NewBadRequestError("Invalid request body")
-		httputils.RespondError(w, *restErr)
+		httputils.RespondError(w, restErr)
 		return
 	}
 	defer r.Body.Close()
@@ -62,7 +62,7 @@ func (s *Controller) handleCreate(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println(err)
 		restErr := resterrors.NewBadRequestError("Invalid item json body")
-		httputils.RespondError(w, *restErr)
+		httputils.RespondError(w, restErr)
 		return
 	}
 
@@ -70,7 +70,7 @@ func (s *Controller) handleCreate(w http.ResponseWriter, r *http.Request) {
 
 	response, createErr := s.itemService.Create(item)
 	if createErr != nil {
-		httputils.RespondError(w, *createErr)
+		httputils.RespondError(w, createErr)
 		return
 	}
 

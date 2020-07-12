@@ -19,7 +19,7 @@ func newItemService(svc *Service) contract.ItemService {
 	}
 }
 
-func (s *itemService) Create(item entity.Item) (*entity.Item, *resterrors.RestErr) {
+func (s *itemService) Create(item entity.Item) (*entity.Item, resterrors.RestErr) {
 
 	result, err := s.svc.db.Item().Save(item)
 	if err != nil {
@@ -29,7 +29,7 @@ func (s *itemService) Create(item entity.Item) (*entity.Item, *resterrors.RestEr
 	return &result, nil
 }
 
-func (s *itemService) GetByID(ID string) (retVal *entity.Item, err *resterrors.RestErr) {
+func (s *itemService) GetByID(ID string) (retVal *entity.Item, err resterrors.RestErr) {
 
 	return retVal, resterrors.NewRestError("Implement me", http.StatusNotImplemented, "not_implemented")
 }
