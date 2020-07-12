@@ -24,7 +24,7 @@ func newUserService(svc *Service) contract.UserService {
 	}
 }
 
-func (s *userService) GetUser(userID int64) (*entity.User, *resterrors.RestErr) {
+func (s *userService) GetUser(userID int64) (*entity.User, resterrors.RestErr) {
 	user := &entity.User{
 		ID: userID,
 	}
@@ -37,11 +37,11 @@ func (s *userService) GetUser(userID int64) (*entity.User, *resterrors.RestErr) 
 	return user, nil
 }
 
-func (s *userService) SearchUser(status string) ([]entity.User, *resterrors.RestErr) {
+func (s *userService) SearchUser(status string) ([]entity.User, resterrors.RestErr) {
 	return s.svc.db.User().GetUserByStatus(status) // The two functions return the same values
 }
 
-func (s *userService) CreateUser(user entity.User) (*entity.User, *resterrors.RestErr) {
+func (s *userService) CreateUser(user entity.User) (*entity.User, resterrors.RestErr) {
 	if err := user.Validate(); err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ func (s *userService) CreateUser(user entity.User) (*entity.User, *resterrors.Re
 	return newUser, nil
 }
 
-func (s *userService) UpdateUser(user entity.User) (*entity.User, *resterrors.RestErr) {
+func (s *userService) UpdateUser(user entity.User) (*entity.User, resterrors.RestErr) {
 
 	// To not update with "" others fields that we don't send in the request and to return  this others fields,
 	// like the created_at in the response, if we don't do this, the field created_at, will be show with the value = ""
@@ -85,11 +85,11 @@ func (s *userService) UpdateUser(user entity.User) (*entity.User, *resterrors.Re
 	return updatedUser, nil
 }
 
-func (s *userService) DeleteUser(userID int64) *resterrors.RestErr {
+func (s *userService) DeleteUser(userID int64) resterrors.RestErr {
 	return s.svc.db.User().Delete(userID)
 }
 
-func (s *userService) LoginUser(request entity.LoginRequest) (*entity.User, *resterrors.RestErr) {
+func (s *userService) LoginUser(request entity.LoginRequest) (*entity.User, resterrors.RestErr) {
 	user := &entity.User{
 		Email:    request.Email,
 		Password: cryptoutils.GetMd5(request.Password),

@@ -38,19 +38,19 @@ func NewController(userService contract.UserService) *Controller {
 func (s *Controller) handleGetUser(c *gin.Context) {
 
 	if err := oauth.AuthenticateRequest(c.Request); err != nil {
-		c.JSON(err.StatusCode, err)
+		c.JSON(err.StatusCode(), err)
 		return
 	}
 
 	userID, errID := s.getIDParameter(c.Param("id"))
 	if errID != nil {
-		c.JSON(errID.StatusCode, errID)
+		c.JSON(errID.StatusCode(), errID)
 		return
 	}
 
 	user, getErr := s.userService.GetUser(userID)
 	if getErr != nil {
-		c.JSON(getErr.StatusCode, getErr)
+		c.JSON(getErr.StatusCode(), getErr)
 		return
 	}
 
@@ -71,13 +71,13 @@ func (s *Controller) handleCreateUser(c *gin.Context) {
 	err := c.ShouldBindJSON(&user)
 	if err != nil {
 		restErr := resterrors.NewBadRequestError("Invalid json body")
-		c.JSON(restErr.StatusCode, restErr)
+		c.JSON(restErr.StatusCode(), restErr)
 		return
 	}
 
 	result, createErr := s.userService.CreateUser(user)
 	if createErr != nil {
-		c.JSON(createErr.StatusCode, createErr)
+		c.JSON(createErr.StatusCode(), createErr)
 		return
 	}
 
@@ -91,13 +91,13 @@ func (s *Controller) handleUpdateUser(c *gin.Context) {
 	err := c.ShouldBindJSON(&user)
 	if err != nil {
 		restErr := resterrors.NewBadRequestError("Invalid json body")
-		c.JSON(restErr.StatusCode, restErr)
+		c.JSON(restErr.StatusCode(), restErr)
 		return
 	}
 
 	userID, errID := s.getIDParameter(c.Param("id"))
 	if errID != nil {
-		c.JSON(errID.StatusCode, errID)
+		c.JSON(errID.StatusCode(), errID)
 		return
 	}
 
@@ -105,7 +105,7 @@ func (s *Controller) handleUpdateUser(c *gin.Context) {
 
 	resUser, updateErr := s.userService.UpdateUser(user)
 	if updateErr != nil {
-		c.JSON(updateErr.StatusCode, updateErr)
+		c.JSON(updateErr.StatusCode(), updateErr)
 		return
 	}
 
@@ -117,13 +117,13 @@ func (s *Controller) handleDeleteUser(c *gin.Context) {
 
 	userID, errID := s.getIDParameter(c.Param("id"))
 	if errID != nil {
-		c.JSON(errID.StatusCode, errID)
+		c.JSON(errID.StatusCode(), errID)
 		return
 	}
 
 	deleteErr := s.userService.DeleteUser(userID)
 	if deleteErr != nil {
-		c.JSON(deleteErr.StatusCode, deleteErr)
+		c.JSON(deleteErr.StatusCode(), deleteErr)
 		return
 	}
 
@@ -137,13 +137,13 @@ func (s *Controller) handleLogin(c *gin.Context) {
 	err := c.ShouldBindJSON(&credentials)
 	if err != nil {
 		restErr := resterrors.NewBadRequestError("Invalid json body")
-		c.JSON(restErr.StatusCode, restErr)
+		c.JSON(restErr.StatusCode(), restErr)
 		return
 	}
 
 	resUser, loginErr := s.userService.LoginUser(credentials)
 	if loginErr != nil {
-		c.JSON(loginErr.StatusCode, loginErr)
+		c.JSON(loginErr.StatusCode(), loginErr)
 		return
 	}
 
@@ -156,7 +156,7 @@ func (s *Controller) handleSearch(c *gin.Context) {
 
 	users, getErr := s.userService.SearchUser(status)
 	if getErr != nil {
-		c.JSON(getErr.StatusCode, getErr)
+		c.JSON(getErr.StatusCode(), getErr)
 		return
 	}
 
@@ -195,7 +195,7 @@ func (s *Controller) limitedJSON(user entity.User, isPublic bool) interface{} {
 	return privateUser
 }
 
-func (s *Controller) getIDParameter(userParamID string) (int64, *resterrors.RestErr) {
+func (s *Controller) getIDParameter(userParamID string) (int64, resterrors.RestErr) {
 	userID, userErr := strconv.ParseInt(userParamID, 10, 64)
 	if userErr != nil {
 		return 0, resterrors.NewBadRequestError("User id should be a number")

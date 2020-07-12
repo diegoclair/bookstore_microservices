@@ -18,7 +18,7 @@ type User struct {
 }
 
 // Validate to validate a user data
-func (user *User) Validate() *resterrors.RestErr {
+func (user *User) Validate() resterrors.RestErr {
 
 	user.FirstName = strings.TrimSpace(user.FirstName)
 	user.LastName = strings.TrimSpace(user.LastName)
@@ -37,7 +37,7 @@ func (user *User) Validate() *resterrors.RestErr {
 	return nil
 }
 
-func (user *User) validadePassword() *resterrors.RestErr {
+func (user *User) validadePassword() resterrors.RestErr {
 	if user.Password == "" || len(user.Password) < 8 {
 		return resterrors.NewBadRequestError("Password need at least 8 caracters")
 	}

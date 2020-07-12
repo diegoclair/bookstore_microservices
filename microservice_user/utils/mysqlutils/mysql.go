@@ -14,7 +14,7 @@ const (
 )
 
 // HandleMySQLError - handle mysql errors
-func HandleMySQLError(errCode string, err error) *resterrors.RestErr {
+func HandleMySQLError(errCode string, err error) resterrors.RestErr {
 
 	//if exists the error on mysql.MySQLError
 	sqlErr, exists := err.(*mysql.MySQLError)

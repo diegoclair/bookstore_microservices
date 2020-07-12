@@ -24,7 +24,7 @@ func newUserRepo(db *sql.DB) *userRepo {
 }
 
 //GetByID - get a user by ID
-func (s *userRepo) GetByID(id int64) (*entity.User, *resterrors.RestErr) {
+func (s *userRepo) GetByID(id int64) (*entity.User, resterrors.RestErr) {
 
 	query := `
 		SELECT 	u.id,
@@ -69,7 +69,7 @@ func (s *userRepo) GetByID(id int64) (*entity.User, *resterrors.RestErr) {
 }
 
 // GetUserByStatus return a list of all users by status
-func (s *userRepo) GetUserByStatus(status string) (users []entity.User, restErr *resterrors.RestErr) {
+func (s *userRepo) GetUserByStatus(status string) (users []entity.User, restErr resterrors.RestErr) {
 
 	query := `
 			SELECT 	u.id,
@@ -126,7 +126,7 @@ func (s *userRepo) GetUserByStatus(status string) (users []entity.User, restErr 
 }
 
 // Create - to create a user on database
-func (s *userRepo) Create(user entity.User) (*entity.User, *resterrors.RestErr) {
+func (s *userRepo) Create(user entity.User) (*entity.User, resterrors.RestErr) {
 
 	query := `
 		INSERT INTO users 
@@ -164,7 +164,7 @@ func (s *userRepo) Create(user entity.User) (*entity.User, *resterrors.RestErr) 
 }
 
 // Update - to update a user on database
-func (s *userRepo) Update(user entity.User) (*entity.User, *resterrors.RestErr) {
+func (s *userRepo) Update(user entity.User) (*entity.User, resterrors.RestErr) {
 
 	query := `
 		UPDATE users
@@ -194,7 +194,7 @@ func (s *userRepo) Update(user entity.User) (*entity.User, *resterrors.RestErr) 
 }
 
 // Delete - to delete a user on database
-func (s *userRepo) Delete(id int64) *resterrors.RestErr {
+func (s *userRepo) Delete(id int64) resterrors.RestErr {
 
 	query := `
 		DELETE FROM users
@@ -220,7 +220,7 @@ func (s *userRepo) Delete(id int64) *resterrors.RestErr {
 }
 
 //GetByEmailAndPassword - get a user by their email and password
-func (s *userRepo) GetByEmailAndPassword(user entity.User) (*entity.User, *resterrors.RestErr) {
+func (s *userRepo) GetByEmailAndPassword(user entity.User) (*entity.User, resterrors.RestErr) {
 
 	query := `
 		SELECT 	u.id,

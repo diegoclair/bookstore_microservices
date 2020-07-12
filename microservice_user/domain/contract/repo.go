@@ -16,10 +16,10 @@ type PingRepo interface{}
 
 // UserRepo defines the data set for user
 type UserRepo interface {
-	GetByID(userID int64) (*entity.User, *resterrors.RestErr)
-	GetUserByStatus(status string) ([]entity.User, *resterrors.RestErr)
-	Create(entity.User) (*entity.User, *resterrors.RestErr)
-	Update(entity.User) (*entity.User, *resterrors.RestErr)
-	Delete(userID int64) *resterrors.RestErr
-	GetByEmailAndPassword(user entity.User) (*entity.User, *resterrors.RestErr)
+	GetByID(userID int64) (*entity.User, resterrors.RestErr)
+	GetUserByStatus(status string) ([]entity.User, resterrors.RestErr)
+	Create(entity.User) (*entity.User, resterrors.RestErr)
+	Update(entity.User) (*entity.User, resterrors.RestErr)
+	Delete(userID int64) resterrors.RestErr
+	GetByEmailAndPassword(user entity.User) (*entity.User, resterrors.RestErr)
 }
