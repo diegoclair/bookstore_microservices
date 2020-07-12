@@ -8,7 +8,6 @@ import (
 	"sync"
 
 	"github.com/diegoclair/go_oauth-lib/oauth"
-	"github.com/diegoclair/go_utils-lib/logger"
 	"github.com/diegoclair/go_utils-lib/resterrors"
 	"github.com/diegoclair/microservice_items/domain/contract"
 	"github.com/diegoclair/microservice_items/domain/entity"
@@ -38,7 +37,6 @@ func NewController(itemService contract.ItemService) *Controller {
 func (s *Controller) handleCreate(w http.ResponseWriter, r *http.Request) {
 
 	if err := oauth.AuthenticateRequest(r); err != nil {
-		logger.Error("Cheguei Err oauth", err)
 		httputils.RespondError(w, err)
 		return
 	}
