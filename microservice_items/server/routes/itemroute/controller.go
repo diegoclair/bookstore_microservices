@@ -8,10 +8,12 @@ import (
 	"sync"
 
 	"github.com/diegoclair/go_oauth-lib/oauth"
+	"github.com/diegoclair/go_utils-lib/logger"
 	"github.com/diegoclair/go_utils-lib/resterrors"
 	"github.com/diegoclair/microservice_items/domain/contract"
 	"github.com/diegoclair/microservice_items/domain/entity"
 	"github.com/diegoclair/microservice_items/utils/httputils"
+	"github.com/gorilla/mux"
 )
 
 var (
@@ -69,7 +71,7 @@ func (s *Controller) handleCreate(w http.ResponseWriter, r *http.Request) {
 
 	item.Seller = sellerID
 
-	response, createErr := s.itemService.Create(item)
+	response, createErr := s.itemService.CreateItem(item)
 	if createErr != nil {
 		httputils.RespondError(w, createErr)
 		return
@@ -79,5 +81,41 @@ func (s *Controller) handleCreate(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *Controller) handleGetByID(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	itemID := vars["item_id"]
 
+	response, err := s.itemService.GetByID(itemID)
+	if err != nil {
+		httputils.RespondError(w, err)
+		return
+	}
+
+	httputils.RespondJSON(w, http.StatusOK, response)
+}
+
+func (s *Controller) handleSearch(w http.ResponseWriter, r *http.Request) {
+
+	bytes, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		logger.Error("Invalid json body: ", err)
+		httputils.RespondError(w, resterrors.NewInternalServerError("Invalid json body"))
+		return
+	}
+	defer r.Body.Close()
+
+	var query entity.EsQuery
+	err = json.Unmarshal(bytes, &query)
+	if err != nil {
+		logger.Error("Invalid unmarshal json body: ", err)
+		httputils.RespondError(w, resterrors.NewInternalServerError("Invalid to unmarshal json body"))
+		return
+	}
+
+	response, apiErr := s.itemService.Search(query)
+	if apiErr != nil {
+		httputils.RespondError(w, apiErr)
+		return
+	}
+
+	httputils.RespondJSON(w, http.StatusOK, response)
 }

@@ -37,7 +37,12 @@ func Instance() (contract.RepoManager, error) {
 	return instance, nil
 }
 
+//Elastic receive db session
+func (c *DBManager) Elastic() contract.ElasticRepo {
+	return newElasticRepo(c.db)
+}
+
 //Item returns the item set
 func (c *DBManager) Item() contract.ItemRepo {
-	return newItemRepo(c.db)
+	return newItemRepo(c.Elastic())
 }

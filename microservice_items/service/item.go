@@ -1,8 +1,6 @@
 package service
 
 import (
-	"net/http"
-
 	"github.com/diegoclair/go_utils-lib/resterrors"
 	"github.com/diegoclair/microservice_items/domain/contract"
 	"github.com/diegoclair/microservice_items/domain/entity"
@@ -19,17 +17,14 @@ func newItemService(svc *Service) contract.ItemService {
 	}
 }
 
-func (s *itemService) Create(item entity.Item) (*entity.Item, resterrors.RestErr) {
-
-	result, err := s.svc.db.Item().Save(item)
-	if err != nil {
-		return nil, err
-	}
-
-	return &result, nil
+func (s *itemService) CreateItem(item entity.Item) (*entity.Item, resterrors.RestErr) {
+	return s.svc.db.Item().CreateItem(item)
 }
 
-func (s *itemService) GetByID(ID string) (retVal *entity.Item, err resterrors.RestErr) {
+func (s *itemService) GetByID(id string) (*entity.Item, resterrors.RestErr) {
+	return s.svc.db.Item().GetByID(id)
+}
 
-	return retVal, resterrors.NewRestError("Implement me", http.StatusNotImplemented, "not_implemented")
+func (s *itemService) Search(query entity.EsQuery) ([]entity.Item, resterrors.RestErr) {
+	return s.svc.db.Item().SearchItems(query)
 }

@@ -23,4 +23,7 @@ func NewRouter(ctrl *Controller, router *mux.Router) *ItemRouter {
 //RegisterRoutes is a routers map of ping requests
 func (r *ItemRouter) RegisterRoutes() {
 	r.router.HandleFunc("/item", r.ctrl.handleCreate).Methods(http.MethodPost)
+	r.router.HandleFunc("/item/{item_id}", r.ctrl.handleGetByID).Methods(http.MethodGet)
+
+	r.router.HandleFunc("/item/search", r.ctrl.handleSearch).Methods(http.MethodPost)
 }
