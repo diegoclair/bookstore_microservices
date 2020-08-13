@@ -23,7 +23,6 @@ func newUserRepo(db *sql.DB) *userRepo {
 	}
 }
 
-//GetByID - get a user by ID
 func (s *userRepo) GetByID(id int64) (*entity.User, resterrors.RestErr) {
 
 	query := `
@@ -219,7 +218,6 @@ func (s *userRepo) Delete(id int64) resterrors.RestErr {
 	return nil
 }
 
-//GetByEmailAndPassword - get a user by their email and password
 func (s *userRepo) GetByEmailAndPassword(user entity.User) (*entity.User, resterrors.RestErr) {
 
 	query := `
