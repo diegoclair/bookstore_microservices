@@ -53,8 +53,8 @@ func (c *itemRepo) GetByID(id string) (*entity.Item, resterrors.RestErr) {
 	var item entity.Item
 	err = json.Unmarshal(*result.Source, &item)
 	if err != nil {
-		logger.Error("Error to parse databse response: ", err)
-		return nil, resterrors.NewInternalServerError("Error to parse databse response")
+		logger.Error("Error to parse database response: ", err)
+		return nil, resterrors.NewInternalServerError("Error to parse database response")
 	}
 
 	item.ID = result.Id
